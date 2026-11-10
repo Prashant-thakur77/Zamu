@@ -2,9 +2,12 @@ Every Friday, Wanjiru's chama puts in a thousand shillings each. This week, it's
 But one treasurer collects it all, in cash or on one phone, and the whole group has to trust them.
 8.7 million Kenyans save in groups like this.
 This is Zamu. Your chama, paid straight to M-Pesa.
-Inside Nimiq Pay, Wanjiru starts the chama: the share, how often, how many.
-Friends join with a code, and the M-Pesa number their turn is paid to.
-Then everyone signs the agreement with their own Nimiq key.
+This is the real app, inside Nimiq Pay on a phone. Open it from Mini Apps.
+Sign in by signing a message with your own Nimiq key. Nobody types a password.
+Start a chama: the share, how often, how many, and the M-Pesa number your turn is paid to.
+Ask for less than fifteen shillings, and Zamu says so before anything is saved.
+Then share the invite code, or the QR code, with your group.
+When everyone has joined, each member signs the agreement with their own Nimiq key.
 Each round, members tap Pay. Nimiq Pay swaps their NIM or USDT to Lightning, and a payout partner turns it into exact shillings in Wanjiru's M-Pesa.
 A share only turns green when the M-Pesa receipt comes back, and the whole group can open it.
 If Nimiq Pay can't tell whether a payment went out, Zamu never lets you pay twice. It checks, and waits.

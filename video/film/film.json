@@ -1,668 +1,716 @@
 {
- "title": "Zamu",
- "fps": 30,
- "width": 1920,
- "height": 1080,
- "theme": {
-  "bg": "#f3ecdf",
-  "surface": "#fbf7ef",
-  "fg": "#1d1712",
-  "muted": "#5a4e42",
-  "accent": "#9a5d00",
-  "accent2": "#f0ac16",
-  "good": "#127a3a",
-  "bad": "#b0402c"
- },
- "scenes": [
-  {
-   "id": "C0",
-   "type": "phonestep",
-   "src": "captures/P8.mp4",
-   "trimBefore": 7.5,
-   "step": "Zamu yako \u00b7 your turn",
-   "title": "Paid straight to M-Pesa.",
-   "label": "demo chama \u00b7 no real money",
-   "duration": 2.6,
-   "transition": {
-    "type": "fade",
-    "dur": 0.3
-   },
-   "sfx": [
+  "title": "Zamu",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "theme": {
+    "bg": "#f3ecdf",
+    "surface": "#fbf7ef",
+    "fg": "#1d1712",
+    "muted": "#5a4e42",
+    "accent": "#9a5d00",
+    "accent2": "#f0ac16",
+    "good": "#127a3a",
+    "bad": "#b0402c"
+  },
+  "scenes": [
     {
-     "at": 0.6,
-     "sfx": "hit",
-     "db": -16
+      "id": "C0",
+      "type": "phonestep",
+      "src": "phone/demo.mp4",
+      "trimBefore": 8.6,
+      "step": "Zamu yako · your turn",
+      "title": "Paid straight to M-Pesa.",
+      "label": "demo chama · recorded in Nimiq Pay",
+      "duration": 2.6,
+      "transition": {
+        "type": "fade",
+        "dur": 0.3
+      },
+      "sfx": [
+        {
+          "at": 0.6,
+          "sfx": "hit",
+          "db": -16
+        }
+      ]
+    },
+    {
+      "id": "S1",
+      "type": "footage",
+      "src": "footage/s1-nairobi.mp4",
+      "grade": "story",
+      "push": "in",
+      "duration": 7.433,
+      "transition": {
+        "type": "fade",
+        "dur": 0.4
+      },
+      "kicker": "Nairobi",
+      "lines": [
+        "Every Friday."
+      ],
+      "textAt": 0.5
+    },
+    {
+      "id": "S2",
+      "type": "ring",
+      "names": [
+        "Wanjiru",
+        "Otieno",
+        "Akinyi",
+        "Kamau",
+        "Njeri",
+        "Baraka"
+      ],
+      "recipient": 0,
+      "share": 1000,
+      "treasurer": true,
+      "payAt": [
+        0.6,
+        1.6,
+        2.6,
+        3.6,
+        4.6,
+        5.6
+      ],
+      "label": "illustration · the old way",
+      "duration": 7.933,
+      "transition": {
+        "type": "cut"
+      },
+      "sfx": [
+        {
+          "at": 1.5,
+          "sfx": "tick",
+          "db": -18
+        },
+        {
+          "at": 2.5,
+          "sfx": "tick",
+          "db": -18
+        },
+        {
+          "at": 3.5,
+          "sfx": "tick",
+          "db": -18
+        },
+        {
+          "at": 4.5,
+          "sfx": "tick",
+          "db": -18
+        },
+        {
+          "at": 5.5,
+          "sfx": "tick",
+          "db": -18
+        },
+        {
+          "at": 6.5,
+          "sfx": "tick",
+          "db": -18
+        }
+      ]
+    },
+    {
+      "id": "S3",
+      "type": "proof",
+      "title": "Chamas are how Kenya saves",
+      "metric": "Kenyan adults in chamas and other savings groups",
+      "unit": "million",
+      "better": "higher",
+      "rows": [
+        {
+          "label": "2021",
+          "value": 7.8,
+          "note": "FinAccess 2021"
+        },
+        {
+          "label": "2024",
+          "value": 8.7,
+          "ours": true,
+          "note": "FinAccess 2024"
+        }
+      ],
+      "footnote": "Source: FinAccess Household Survey 2024 (CBK, KNBS, FSD Kenya)",
+      "duration": 5.5,
+      "transition": {
+        "type": "cut"
+      },
+      "noBetter": true
+    },
+    {
+      "id": "T1",
+      "type": "turn",
+      "title": "",
+      "wordmark": true,
+      "subtitle": "Your chama, paid straight to M-Pesa.",
+      "duration": 5.067,
+      "transition": {
+        "type": "cut"
+      },
+      "min": 3.2,
+      "sfx": [
+        {
+          "at": 0.25,
+          "sfx": "hit",
+          "db": -11
+        },
+        {
+          "at": 0.25,
+          "sfx": "tick",
+          "db": -14
+        },
+        {
+          "at": 0.85,
+          "sfx": "whoosh",
+          "db": -16
+        }
+      ]
+    },
+    {
+      "id": "S5",
+      "type": "phonestep",
+      "src": "phone/open.mp4",
+      "step": "Recorded on a phone",
+      "title": "Inside Nimiq Pay",
+      "body": "Mini Apps → zamu.prashantthakur.dev",
+      "label": "real phone · Nimiq Pay mainnet · 1.25×",
+      "side": "right",
+      "duration": 6.733,
+      "transition": {
+        "type": "slide",
+        "dur": 0.35,
+        "dir": "from-right"
+      }
+    },
+    {
+      "id": "S5b",
+      "type": "phonestep",
+      "src": "phone/signin.mp4",
+      "step": "nimiq.sign()",
+      "title": "Sign in with your Nimiq key",
+      "body": "Nimiq Pay asks to connect, then to sign. No password.",
+      "label": "real phone · Nimiq Pay",
+      "side": "left",
+      "zoom": {
+        "at": 1.6,
+        "y": 0.5,
+        "scale": 1.25
+      },
+      "duration": 6.633,
+      "transition": {
+        "type": "cut"
+      }
+    },
+    {
+      "id": "S6",
+      "type": "phonestep",
+      "src": "phone/create.mp4",
+      "step": "Step 1",
+      "title": "Start a chama",
+      "body": "Share, how often, how many, and where your turn is paid.",
+      "label": "real phone · sped up 4×",
+      "side": "right",
+      "duration": 8.3,
+      "transition": {
+        "type": "cut"
+      }
+    },
+    {
+      "id": "S6e",
+      "type": "phonestep",
+      "src": "phone/error.mp4",
+      "step": "Error handling",
+      "title": "Wrong amounts caught",
+      "body": "KSh 15 to KSh 50,000 per share.",
+      "label": "real phone · 1.3×",
+      "side": "left",
+      "zoom": {
+        "at": 0.4,
+        "y": 0.25,
+        "scale": 1.35
+      },
+      "duration": 6.267,
+      "transition": {
+        "type": "cut"
+      }
+    },
+    {
+      "id": "S6i",
+      "type": "phonestep",
+      "src": "phone/invite.mp4",
+      "step": "Step 2",
+      "title": "Invite your group",
+      "body": "A code, a QR code, or a WhatsApp message.",
+      "label": "real phone · Nimiq Pay",
+      "side": "right",
+      "duration": 5.5,
+      "transition": {
+        "type": "slide",
+        "dur": 0.35,
+        "dir": "from-right"
+      }
+    },
+    {
+      "id": "S7",
+      "type": "phonestep",
+      "src": "captures/P4.mp4",
+      "trimBefore": 1.0,
+      "step": "Step 3 · nimiq.sign()",
+      "title": "Everyone signs",
+      "body": "The agreement, with their own Nimiq key.",
+      "label": "local test · second member needed · mock wallet signs for real",
+      "side": "left",
+      "duration": 5.967,
+      "transition": {
+        "type": "cut"
+      }
+    },
+    {
+      "id": "T2",
+      "type": "turn",
+      "title": "How a round works",
+      "kicker": "every hand to one hand",
+      "duration": 2.2,
+      "transition": {
+        "type": "cut"
+      },
+      "sfx": [
+        {
+          "at": 0.25,
+          "sfx": "hit",
+          "db": -11
+        },
+        {
+          "at": 0.25,
+          "sfx": "tick",
+          "db": -14
+        },
+        {
+          "at": 0.85,
+          "sfx": "whoosh",
+          "db": -16
+        }
+      ]
+    },
+    {
+      "id": "S8",
+      "type": "ring",
+      "names": [
+        "Wanjiru",
+        "Otieno",
+        "Akinyi",
+        "Kamau",
+        "Njeri",
+        "Baraka"
+      ],
+      "recipient": 0,
+      "share": 1000,
+      "payAt": [
+        1.6,
+        3.4,
+        5.2,
+        7.0,
+        8.8
+      ],
+      "codes": [
+        "TKA7Q2M9PL",
+        "TKB3X8R1NZ",
+        "TKC9D4K2VW",
+        "TKD2H7S5QT",
+        "TKE6M1P8JR"
+      ],
+      "label": "illustration · how a round works",
+      "duration": 12.6,
+      "transition": {
+        "type": "fade",
+        "dur": 0.4
+      },
+      "sfx": [
+        {
+          "at": 2.5,
+          "sfx": "ping",
+          "db": -17
+        },
+        {
+          "at": 4.3,
+          "sfx": "ping",
+          "db": -17
+        },
+        {
+          "at": 6.1000000000000005,
+          "sfx": "ping",
+          "db": -17
+        },
+        {
+          "at": 7.9,
+          "sfx": "ping",
+          "db": -17
+        },
+        {
+          "at": 9.700000000000001,
+          "sfx": "ping",
+          "db": -17
+        }
+      ]
+    },
+    {
+      "id": "S9",
+      "type": "phonestep",
+      "src": "captures/P5.mp4",
+      "trimBefore": 3.6,
+      "playbackRate": 1.6,
+      "step": "payLightningInvoice()",
+      "title": "Green means delivered",
+      "body": "Only when the M-Pesa receipt comes back.",
+      "label": "local test · mock payout partner · sped up 1.6×",
+      "side": "left",
+      "zoom": {
+        "at": 4.2,
+        "y": 0.55,
+        "scale": 1.35
+      },
+      "duration": 6.733,
+      "transition": {
+        "type": "cut"
+      },
+      "sfx": [
+        {
+          "at": 5.9,
+          "sfx": "hit",
+          "db": -14
+        }
+      ]
+    },
+    {
+      "id": "S10",
+      "type": "phonestep",
+      "src": "captures/P7.mp4",
+      "trimBefore": 2.2,
+      "step": "Outcome unknown",
+      "title": "Never pay twice",
+      "body": "Zamu checks, and waits.",
+      "label": "local test · wallet reports outcome unknown",
+      "side": "right",
+      "zoom": {
+        "at": 2.0,
+        "y": 0.72,
+        "scale": 1.3
+      },
+      "duration": 8.267,
+      "transition": {
+        "type": "fade",
+        "dur": 0.3
+      }
+    },
+    {
+      "id": "S11",
+      "type": "ledger",
+      "names": [
+        "Wanjiru",
+        "Otieno",
+        "Akinyi",
+        "Kamau"
+      ],
+      "open": 1,
+      "owes": 1,
+      "skipAt": 1.6,
+      "duration": 5.4,
+      "transition": {
+        "type": "cut"
+      },
+      "sfx": [
+        {
+          "at": 1.6,
+          "sfx": "whoosh",
+          "db": -14
+        }
+      ]
+    },
+    {
+      "id": "T3",
+      "type": "turn",
+      "title": "Under the hood",
+      "kicker": "what does the work",
+      "duration": 2.0,
+      "transition": {
+        "type": "cut"
+      },
+      "sfx": [
+        {
+          "at": 0.25,
+          "sfx": "hit",
+          "db": -11
+        },
+        {
+          "at": 0.25,
+          "sfx": "tick",
+          "db": -14
+        },
+        {
+          "at": 0.85,
+          "sfx": "whoosh",
+          "db": -16
+        }
+      ]
+    },
+    {
+      "id": "S12",
+      "type": "arch3d",
+      "title": "Under the hood",
+      "layers": [
+        {
+          "id": "mpesa",
+          "label": "M-Pesa",
+          "sub": "exact shillings, a receipt code",
+          "color": "#2fa84f"
+        },
+        {
+          "id": "partner",
+          "label": "Payout partner",
+          "sub": "Lightning in, M-Pesa out",
+          "color": "#e9dfcd"
+        },
+        {
+          "id": "lightning",
+          "label": "Bitcoin Lightning",
+          "sub": "settles in seconds",
+          "color": "#f0ac16"
+        },
+        {
+          "id": "zamu",
+          "label": "Zamu checks every invoice",
+          "sub": "mainnet · exact amount · right phone · still valid",
+          "color": "#fbf7ef"
+        },
+        {
+          "id": "nimiq",
+          "label": "Nimiq Pay",
+          "sub": "sign() · payLightningInvoice() · NIM or USDT",
+          "color": "#e9dfcd"
+        }
+      ],
+      "satellites": [
+        {
+          "id": "aws",
+          "label": "AWS Lambda + API Gateway"
+        },
+        {
+          "id": "db",
+          "label": "Postgres (RDS)"
+        },
+        {
+          "id": "cron",
+          "label": "Re-check every 5 min"
+        }
+      ],
+      "traces": [
+        {
+          "from": "zamu",
+          "to": "aws",
+          "at": 11.6
+        },
+        {
+          "from": "zamu",
+          "to": "db",
+          "at": 12.2
+        },
+        {
+          "from": "zamu",
+          "to": "cron",
+          "at": 12.6
+        }
+      ],
+      "cues": {
+        "nimiq": 1.7,
+        "zamu": 4.2,
+        "lightning": 6.5,
+        "partner": 9.0,
+        "mpesa": 13.6
+      },
+      "duration": 15.733,
+      "transition": {
+        "type": "fade",
+        "dur": 0.4
+      }
+    },
+    {
+      "id": "S13",
+      "type": "proof",
+      "title": "Payout leg, live quote",
+      "metric": "cost over the partner's published rate · %",
+      "unit": "%",
+      "better": "lower",
+      "rows": [
+        {
+          "label": "Zamu payout leg (KSh 1,000)",
+          "value": 1,
+          "ours": true,
+          "note": "10,603 sats"
+        },
+        {
+          "label": "Average cost to send $200 to sub-Saharan Africa",
+          "value": 8.46,
+          "note": "full remittance, not 1:1"
+        }
+      ],
+      "footnote": "Live invoice from the payout partner, validated by Zamu, not paid (2026-11-10). Baseline: World Bank, Remittance Prices Worldwide, Q3 2025. Excludes the Nimiq Pay swap fee.",
+      "duration": 6.533,
+      "transition": {
+        "type": "cut"
+      },
+      "noBadge": true,
+      "noBetter": true
+    },
+    {
+      "id": "S14",
+      "type": "code",
+      "title": "Every number from a script",
+      "file": "scripts/proof.ts",
+      "code": "const delivered = paid.filter((r) => r.inv.status === 'delivered')\nconst tapToDelivered = delivered.map((r) =>\n  (r.inv.deliveredAt - r.inv.tappedAt) / 1000)\nconst costs = delivered.map((r) =>\n  (r.inv.msats / (r.inv.kes * r.rate) - 1) * 100)\nwriteFileSync('PROOF.md', md)",
+      "highlight": [
+        [
+          1,
+          3
+        ],
+        [
+          4,
+          5
+        ]
+      ],
+      "duration": 5.3,
+      "transition": {
+        "type": "fade",
+        "dur": 0.3
+      }
+    },
+    {
+      "id": "T4",
+      "type": "turn",
+      "title": "What nobody else does",
+      "duration": 1.8,
+      "transition": {
+        "type": "cut"
+      },
+      "sfx": [
+        {
+          "at": 0.25,
+          "sfx": "hit",
+          "db": -11
+        },
+        {
+          "at": 0.25,
+          "sfx": "tick",
+          "db": -14
+        },
+        {
+          "at": 0.85,
+          "sfx": "whoosh",
+          "db": -16
+        }
+      ]
+    },
+    {
+      "id": "S15",
+      "type": "kinetic",
+      "lines": [
+        "Shares land in M-Pesa.",
+        "Paid means a receipt.",
+        "Everyone signs with Nimiq.",
+        "No treasurer holds the pot."
+      ],
+      "emphasis": [
+        "M-Pesa.",
+        "receipt.",
+        "Nimiq.",
+        "No"
+      ],
+      "riserInto": true,
+      "duration": 10.233,
+      "transition": {
+        "type": "fade",
+        "dur": 0.3
+      }
+    },
+    {
+      "id": "S16",
+      "type": "ring",
+      "names": [
+        "Wanjiru",
+        "Otieno",
+        "Akinyi",
+        "Kamau",
+        "Njeri",
+        "Baraka"
+      ],
+      "recipient": 0,
+      "share": 1000,
+      "payAt": [
+        0.2,
+        0.5,
+        0.8,
+        1.1,
+        1.4
+      ],
+      "turnAt": 4.6,
+      "codes": [
+        "TKA7Q2M9PL",
+        "TKB3X8R1NZ",
+        "TKC9D4K2VW",
+        "TKD2H7S5QT",
+        "TKE6M1P8JR"
+      ],
+      "label": "illustration",
+      "duration": 7.633,
+      "transition": {
+        "type": "fade",
+        "dur": 0.4
+      },
+      "sfx": [
+        {
+          "at": 1.1,
+          "sfx": "ping",
+          "db": -17
+        },
+        {
+          "at": 1.4,
+          "sfx": "ping",
+          "db": -17
+        },
+        {
+          "at": 1.7000000000000002,
+          "sfx": "ping",
+          "db": -17
+        },
+        {
+          "at": 2.0,
+          "sfx": "ping",
+          "db": -17
+        },
+        {
+          "at": 2.3,
+          "sfx": "ping",
+          "db": -17
+        },
+        {
+          "at": 4.8,
+          "sfx": "hit",
+          "db": -12
+        }
+      ]
+    },
+    {
+      "id": "S17",
+      "type": "endcard",
+      "name": "zamu",
+      "tagline": "Your chama, paid straight to M-Pesa.",
+      "links": [
+        "In Nimiq Pay: Mini Apps → Custom URL",
+        "zamu.prashantthakur.dev",
+        "github.com/Prashant-thakur77/Zamu"
+      ],
+      "duration": 4.5
     }
-   ]
-  },
-  {
-   "id": "S1",
-   "type": "footage",
-   "src": "footage/s1-nairobi.mp4",
-   "grade": "story",
-   "push": "in",
-   "duration": 7.433,
-   "transition": {
-    "type": "fade",
-    "dur": 0.4
-   },
-   "kicker": "Nairobi",
-   "lines": [
-    "Every Friday."
-   ],
-   "textAt": 0.5
-  },
-  {
-   "id": "S2",
-   "type": "ring",
-   "names": [
-    "Wanjiru",
-    "Otieno",
-    "Akinyi",
-    "Kamau",
-    "Njeri",
-    "Baraka"
-   ],
-   "recipient": 0,
-   "share": 1000,
-   "treasurer": true,
-   "payAt": [
-    0.6,
-    1.6,
-    2.6,
-    3.6,
-    4.6,
-    5.6
-   ],
-   "label": "illustration \u00b7 the old way",
-   "duration": 7.933,
-   "transition": {
-    "type": "cut"
-   },
-   "sfx": [
-    {
-     "at": 1.5,
-     "sfx": "tick",
-     "db": -18
-    },
-    {
-     "at": 2.5,
-     "sfx": "tick",
-     "db": -18
-    },
-    {
-     "at": 3.5,
-     "sfx": "tick",
-     "db": -18
-    },
-    {
-     "at": 4.5,
-     "sfx": "tick",
-     "db": -18
-    },
-    {
-     "at": 5.5,
-     "sfx": "tick",
-     "db": -18
-    },
-    {
-     "at": 6.5,
-     "sfx": "tick",
-     "db": -18
-    }
-   ]
-  },
-  {
-   "id": "S3",
-   "type": "proof",
-   "title": "Chamas are how Kenya saves",
-   "metric": "Kenyan adults in chamas and other savings groups",
-   "unit": "million",
-   "better": "higher",
-   "rows": [
-    {
-     "label": "2021",
-     "value": 7.8,
-     "note": "FinAccess 2021"
-    },
-    {
-     "label": "2024",
-     "value": 8.7,
-     "ours": true,
-     "note": "FinAccess 2024"
-    }
-   ],
-   "footnote": "Source: FinAccess Household Survey 2024 (CBK, KNBS, FSD Kenya)",
-   "duration": 5.5,
-   "transition": {
-    "type": "cut"
-   },
-   "noBetter": true
-  },
-  {
-   "id": "T1",
-   "type": "turn",
-   "title": "",
-   "wordmark": true,
-   "subtitle": "Your chama, paid straight to M-Pesa.",
-   "duration": 5.067,
-   "transition": {
-    "type": "cut"
-   },
-   "min": 3.2,
-   "sfx": [
-    {
-     "at": 0.25,
-     "sfx": "hit",
-     "db": -11
-    },
-    {
-     "at": 0.25,
-     "sfx": "tick",
-     "db": -14
-    },
-    {
-     "at": 0.85,
-     "sfx": "whoosh",
-     "db": -16
-    }
-   ]
-  },
-  {
-   "id": "S5",
-   "type": "phonestep",
-   "src": "captures/P2.mp4",
-   "trimBefore": 6.8,
-   "playbackRate": 1.5,
-   "step": "Step 1 \u00b7 inside Nimiq Pay",
-   "title": "Start a chama",
-   "body": "The share, how often, how many.",
-   "label": "local test \u00b7 sped up 1.5\u00d7",
-   "side": "right",
-   "duration": 7.133,
-   "transition": {
-    "type": "slide",
-    "dur": 0.35,
-    "dir": "from-right"
-   }
-  },
-  {
-   "id": "S6",
-   "type": "phonestep",
-   "src": "captures/P3.mp4",
-   "trimBefore": 2.5,
-   "playbackRate": 1.3,
-   "step": "Step 2",
-   "title": "Join with a code",
-   "body": "And the M-Pesa number your turn is paid to.",
-   "label": "local test \u00b7 sped up 1.3\u00d7",
-   "side": "left",
-   "duration": 5.5,
-   "transition": {
-    "type": "slide",
-    "dur": 0.35,
-    "dir": "from-right"
-   }
-  },
-  {
-   "id": "S7",
-   "type": "phonestep",
-   "src": "captures/P4.mp4",
-   "trimBefore": 1.0,
-   "step": "Step 3 \u00b7 nimiq.sign()",
-   "title": "Everyone signs",
-   "body": "The agreement, with their own Nimiq key.",
-   "label": "local test \u00b7 mock wallet signs for real",
-   "side": "right",
-   "duration": 4.667,
-   "transition": {
-    "type": "cut"
-   }
-  },
-  {
-   "id": "T2",
-   "type": "turn",
-   "title": "How a round works",
-   "kicker": "every hand to one hand",
-   "duration": 2.2,
-   "transition": {
-    "type": "cut"
-   },
-   "sfx": [
-    {
-     "at": 0.25,
-     "sfx": "hit",
-     "db": -11
-    },
-    {
-     "at": 0.25,
-     "sfx": "tick",
-     "db": -14
-    },
-    {
-     "at": 0.85,
-     "sfx": "whoosh",
-     "db": -16
-    }
-   ]
-  },
-  {
-   "id": "S8",
-   "type": "ring",
-   "names": [
-    "Wanjiru",
-    "Otieno",
-    "Akinyi",
-    "Kamau",
-    "Njeri",
-    "Baraka"
-   ],
-   "recipient": 0,
-   "share": 1000,
-   "payAt": [
-    1.6,
-    3.4,
-    5.2,
-    7.0,
-    8.8
-   ],
-   "codes": [
-    "TKA7Q2M9PL",
-    "TKB3X8R1NZ",
-    "TKC9D4K2VW",
-    "TKD2H7S5QT",
-    "TKE6M1P8JR"
-   ],
-   "label": "illustration \u00b7 how a round works",
-   "duration": 12.633,
-   "transition": {
-    "type": "fade",
-    "dur": 0.4
-   },
-   "sfx": [
-    {
-     "at": 2.5,
-     "sfx": "ping",
-     "db": -17
-    },
-    {
-     "at": 4.3,
-     "sfx": "ping",
-     "db": -17
-    },
-    {
-     "at": 6.1000000000000005,
-     "sfx": "ping",
-     "db": -17
-    },
-    {
-     "at": 7.9,
-     "sfx": "ping",
-     "db": -17
-    },
-    {
-     "at": 9.700000000000001,
-     "sfx": "ping",
-     "db": -17
-    }
-   ]
-  },
-  {
-   "id": "S9",
-   "type": "phonestep",
-   "src": "captures/P5.mp4",
-   "trimBefore": 3.6,
-   "playbackRate": 1.6,
-   "step": "payLightningInvoice()",
-   "title": "Green means delivered",
-   "body": "Only when the M-Pesa receipt comes back.",
-   "label": "local test \u00b7 mock payout partner \u00b7 sped up 1.6\u00d7",
-   "side": "left",
-   "zoom": {
-    "at": 4.2,
-    "y": 0.55,
-    "scale": 1.35
-   },
-   "duration": 6.733,
-   "transition": {
-    "type": "cut"
-   },
-   "sfx": [
-    {
-     "at": 5.9,
-     "sfx": "hit",
-     "db": -14
-    }
-   ]
-  },
-  {
-   "id": "S10",
-   "type": "phonestep",
-   "src": "captures/P7.mp4",
-   "trimBefore": 2.2,
-   "step": "Outcome unknown",
-   "title": "Never pay twice",
-   "body": "Zamu checks, and waits.",
-   "label": "local test \u00b7 wallet reports outcome unknown",
-   "side": "right",
-   "zoom": {
-    "at": 2.0,
-    "y": 0.72,
-    "scale": 1.3
-   },
-   "duration": 8.3,
-   "transition": {
-    "type": "fade",
-    "dur": 0.3
-   }
-  },
-  {
-   "id": "S11",
-   "type": "ledger",
-   "names": [
-    "Wanjiru",
-    "Otieno",
-    "Akinyi",
-    "Kamau"
-   ],
-   "open": 1,
-   "owes": 1,
-   "skipAt": 1.6,
-   "duration": 5.433,
-   "transition": {
-    "type": "cut"
-   },
-   "sfx": [
-    {
-     "at": 1.6,
-     "sfx": "whoosh",
-     "db": -14
-    }
-   ]
-  },
-  {
-   "id": "T3",
-   "type": "turn",
-   "title": "Under the hood",
-   "kicker": "what does the work",
-   "duration": 2.0,
-   "transition": {
-    "type": "cut"
-   },
-   "sfx": [
-    {
-     "at": 0.25,
-     "sfx": "hit",
-     "db": -11
-    },
-    {
-     "at": 0.25,
-     "sfx": "tick",
-     "db": -14
-    },
-    {
-     "at": 0.85,
-     "sfx": "whoosh",
-     "db": -16
-    }
-   ]
-  },
-  {
-   "id": "S12",
-   "type": "arch3d",
-   "title": "Under the hood",
-   "layers": [
-    {
-     "id": "mpesa",
-     "label": "M-Pesa",
-     "sub": "exact shillings, a receipt code",
-     "color": "#2fa84f"
-    },
-    {
-     "id": "partner",
-     "label": "Payout partner",
-     "sub": "Lightning in, M-Pesa out",
-     "color": "#e9dfcd"
-    },
-    {
-     "id": "lightning",
-     "label": "Bitcoin Lightning",
-     "sub": "settles in seconds",
-     "color": "#f0ac16"
-    },
-    {
-     "id": "zamu",
-     "label": "Zamu checks every invoice",
-     "sub": "mainnet \u00b7 exact amount \u00b7 right phone \u00b7 still valid",
-     "color": "#fbf7ef"
-    },
-    {
-     "id": "nimiq",
-     "label": "Nimiq Pay",
-     "sub": "sign() \u00b7 payLightningInvoice() \u00b7 NIM or USDT",
-     "color": "#e9dfcd"
-    }
-   ],
-   "satellites": [
-    {
-     "id": "aws",
-     "label": "AWS Lambda + API Gateway"
-    },
-    {
-     "id": "db",
-     "label": "Postgres (RDS)"
-    },
-    {
-     "id": "cron",
-     "label": "Re-check every 5 min"
-    }
-   ],
-   "traces": [
-    {
-     "from": "zamu",
-     "to": "aws",
-     "at": 11.6
-    },
-    {
-     "from": "zamu",
-     "to": "db",
-     "at": 12.2
-    },
-    {
-     "from": "zamu",
-     "to": "cron",
-     "at": 12.6
-    }
-   ],
-   "cues": {
-    "nimiq": 1.7,
-    "zamu": 4.2,
-    "lightning": 6.5,
-    "partner": 9.0,
-    "mpesa": 13.6
-   },
-   "duration": 15.767,
-   "transition": {
-    "type": "fade",
-    "dur": 0.4
-   }
-  },
-  {
-   "id": "S13",
-   "type": "proof",
-   "title": "Payout leg, live quote",
-   "metric": "cost over the partner's published rate \u00b7 %",
-   "unit": "%",
-   "better": "lower",
-   "rows": [
-    {
-     "label": "Zamu payout leg (KSh 1,000)",
-     "value": 1,
-     "ours": true,
-     "note": "10,603 sats"
-    },
-    {
-     "label": "Average cost to send $200 to sub-Saharan Africa",
-     "value": 8.46,
-     "note": "full remittance, not 1:1"
-    }
-   ],
-   "footnote": "Live invoice from the payout partner, validated by Zamu, not paid (2026-11-10). Baseline: World Bank, Remittance Prices Worldwide, Q3 2025. Excludes the Nimiq Pay swap fee.",
-   "duration": 6.567,
-   "transition": {
-    "type": "cut"
-   },
-   "noBadge": true,
-   "noBetter": true
-  },
-  {
-   "id": "S14",
-   "type": "code",
-   "title": "Every number from a script",
-   "file": "scripts/proof.ts",
-   "code": "const delivered = paid.filter((r) => r.inv.status === 'delivered')\nconst tapToDelivered = delivered.map((r) =>\n  (r.inv.deliveredAt - r.inv.tappedAt) / 1000)\nconst costs = delivered.map((r) =>\n  (r.inv.msats / (r.inv.kes * r.rate) - 1) * 100)\nwriteFileSync('PROOF.md', md)",
-   "highlight": [
-    [
-     1,
-     3
-    ],
-    [
-     4,
-     5
-    ]
-   ],
-   "duration": 5.133,
-   "transition": {
-    "type": "fade",
-    "dur": 0.3
-   }
-  },
-  {
-   "id": "T4",
-   "type": "turn",
-   "title": "What nobody else does",
-   "duration": 1.8,
-   "transition": {
-    "type": "cut"
-   },
-   "sfx": [
-    {
-     "at": 0.25,
-     "sfx": "hit",
-     "db": -11
-    },
-    {
-     "at": 0.25,
-     "sfx": "tick",
-     "db": -14
-    },
-    {
-     "at": 0.85,
-     "sfx": "whoosh",
-     "db": -16
-    }
-   ]
-  },
-  {
-   "id": "S15",
-   "type": "kinetic",
-   "lines": [
-    "Shares land in M-Pesa.",
-    "Paid means a receipt.",
-    "Everyone signs with Nimiq.",
-    "No treasurer holds the pot."
-   ],
-   "emphasis": [
-    "M-Pesa.",
-    "receipt.",
-    "Nimiq.",
-    "No"
-   ],
-   "riserInto": true,
-   "duration": 10.267,
-   "transition": {
-    "type": "fade",
-    "dur": 0.3
-   }
-  },
-  {
-   "id": "S16",
-   "type": "ring",
-   "names": [
-    "Wanjiru",
-    "Otieno",
-    "Akinyi",
-    "Kamau",
-    "Njeri",
-    "Baraka"
-   ],
-   "recipient": 0,
-   "share": 1000,
-   "payAt": [
-    0.2,
-    0.5,
-    0.8,
-    1.1,
-    1.4
-   ],
-   "turnAt": 4.6,
-   "codes": [
-    "TKA7Q2M9PL",
-    "TKB3X8R1NZ",
-    "TKC9D4K2VW",
-    "TKD2H7S5QT",
-    "TKE6M1P8JR"
-   ],
-   "label": "illustration",
-   "duration": 7.667,
-   "transition": {
-    "type": "fade",
-    "dur": 0.4
-   },
-   "sfx": [
-    {
-     "at": 1.1,
-     "sfx": "ping",
-     "db": -17
-    },
-    {
-     "at": 1.4,
-     "sfx": "ping",
-     "db": -17
-    },
-    {
-     "at": 1.7000000000000002,
-     "sfx": "ping",
-     "db": -17
-    },
-    {
-     "at": 2.0,
-     "sfx": "ping",
-     "db": -17
-    },
-    {
-     "at": 2.3,
-     "sfx": "ping",
-     "db": -17
-    },
-    {
-     "at": 4.8,
-     "sfx": "hit",
-     "db": -12
-    }
-   ]
-  },
-  {
-   "id": "S17",
-   "type": "endcard",
-   "name": "zamu",
-   "tagline": "Your chama, paid straight to M-Pesa.",
-   "links": [
-    "In Nimiq Pay: Mini Apps \u2192 Custom URL",
-    "zamu.prashantthakur.dev",
-    "github.com/Prashant-thakur77/Zamu"
-   ],
-   "duration": 4.5
-  }
- ]
+  ]
 }

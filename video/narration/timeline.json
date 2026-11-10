@@ -1,5 +1,5 @@
 {
- "duration": 134.833,
+ "duration": 156.867,
  "scenes": [
   {
    "id": "C0",
@@ -34,96 +34,114 @@
   {
    "id": "S5",
    "start": 28.533,
-   "duration": 7.133,
+   "duration": 6.733,
+   "voice": true
+  },
+  {
+   "id": "S5b",
+   "start": 35.267,
+   "duration": 6.633,
    "voice": true
   },
   {
    "id": "S6",
-   "start": 35.667,
+   "start": 41.9,
+   "duration": 8.3,
+   "voice": true
+  },
+  {
+   "id": "S6e",
+   "start": 50.2,
+   "duration": 6.267,
+   "voice": true
+  },
+  {
+   "id": "S6i",
+   "start": 56.467,
    "duration": 5.5,
    "voice": true
   },
   {
    "id": "S7",
-   "start": 41.167,
-   "duration": 4.667,
+   "start": 61.967,
+   "duration": 5.967,
    "voice": true
   },
   {
    "id": "T2",
-   "start": 45.833,
+   "start": 67.933,
    "duration": 2.2,
    "voice": false
   },
   {
    "id": "S8",
-   "start": 48.033,
-   "duration": 12.633,
+   "start": 70.133,
+   "duration": 12.6,
    "voice": true
   },
   {
    "id": "S9",
-   "start": 60.667,
+   "start": 82.733,
    "duration": 6.733,
    "voice": true
   },
   {
    "id": "S10",
-   "start": 67.4,
-   "duration": 8.3,
+   "start": 89.467,
+   "duration": 8.267,
    "voice": true
   },
   {
    "id": "S11",
-   "start": 75.7,
-   "duration": 5.433,
+   "start": 97.733,
+   "duration": 5.4,
    "voice": true
   },
   {
    "id": "T3",
-   "start": 81.133,
+   "start": 103.133,
    "duration": 2.0,
    "voice": false
   },
   {
    "id": "S12",
-   "start": 83.133,
-   "duration": 15.767,
+   "start": 105.133,
+   "duration": 15.733,
    "voice": true
   },
   {
    "id": "S13",
-   "start": 98.9,
-   "duration": 6.567,
+   "start": 120.867,
+   "duration": 6.533,
    "voice": true
   },
   {
    "id": "S14",
-   "start": 105.467,
-   "duration": 5.133,
+   "start": 127.4,
+   "duration": 5.3,
    "voice": true
   },
   {
    "id": "T4",
-   "start": 110.6,
+   "start": 132.7,
    "duration": 1.8,
    "voice": false
   },
   {
    "id": "S15",
-   "start": 112.4,
-   "duration": 10.267,
+   "start": 134.5,
+   "duration": 10.233,
    "voice": true
   },
   {
    "id": "S16",
-   "start": 122.667,
-   "duration": 7.667,
+   "start": 144.733,
+   "duration": 7.633,
    "voice": true
   },
   {
    "id": "S17",
-   "start": 130.333,
+   "start": 152.367,
    "duration": 4.5,
    "voice": true
   }
@@ -161,91 +179,112 @@
    "id": "s5",
    "scene": "S5",
    "start": 28.833,
-   "end": 35.073,
-   "caption": "Inside Nimiq Pay, Wanjiru starts the chama: the share, how often, how many."
+   "end": 34.673,
+   "caption": "This is the real app, inside Nimiq Pay on a phone. Open it from Mini Apps."
+  },
+  {
+   "id": "s5b",
+   "scene": "S5b",
+   "start": 35.567,
+   "end": 41.367,
+   "caption": "Sign in by signing a message with your own Nimiq key. Nobody types a password."
   },
   {
    "id": "s6",
    "scene": "S6",
-   "start": 35.967,
-   "end": 40.647,
-   "caption": "Friends join with a code, and the M-Pesa number their turn is paid to."
+   "start": 42.2,
+   "end": 49.56,
+   "caption": "Start a chama: the share, how often, how many, and the M-Pesa number your turn is paid to."
+  },
+  {
+   "id": "s6e",
+   "scene": "S6e",
+   "start": 50.5,
+   "end": 55.9,
+   "caption": "Ask for less than fifteen shillings, and Zamu says so before anything is saved."
+  },
+  {
+   "id": "s6i",
+   "scene": "S6i",
+   "start": 56.767,
+   "end": 61.287,
+   "caption": "Then share the invite code, or the QR code, with your group."
   },
   {
    "id": "s7",
    "scene": "S7",
-   "start": 41.467,
-   "end": 45.187,
-   "caption": "Then everyone signs the agreement with their own Nimiq key."
+   "start": 62.267,
+   "end": 67.307,
+   "caption": "When everyone has joined, each member signs the agreement with their own Nimiq key."
   },
   {
    "id": "s8",
    "scene": "S8",
-   "start": 48.333,
-   "end": 60.093,
+   "start": 70.433,
+   "end": 82.193,
    "caption": "Each round, members tap Pay. Nimiq Pay swaps their NIM or USDT to Lightning, and a payout partner turns it into exact shillings in Wanjiru's M-Pesa."
   },
   {
    "id": "s9",
    "scene": "S9",
-   "start": 60.967,
-   "end": 66.727,
+   "start": 83.033,
+   "end": 88.793,
    "caption": "A share only turns green when the M-Pesa receipt comes back, and the whole group can open it."
   },
   {
    "id": "s10",
    "scene": "S10",
-   "start": 67.7,
-   "end": 75.1,
+   "start": 89.767,
+   "end": 97.167,
    "caption": "If Nimiq Pay can't tell whether a payment went out, Zamu never lets you pay twice. It checks, and waits."
   },
   {
    "id": "s11",
    "scene": "S11",
-   "start": 76.0,
-   "end": 80.6,
+   "start": 98.033,
+   "end": 102.633,
    "caption": "And anyone who stops paying loses their turn until they catch up."
   },
   {
    "id": "s12",
    "scene": "S12",
-   "start": 83.433,
-   "end": 98.233,
+   "start": 105.433,
+   "end": 120.233,
    "caption": "Under the hood, Nimiq Pay signs and pays. Zamu checks every invoice: Bitcoin mainnet, the exact amount, the right phone, still valid. A job on AWS keeps checking until the receipt arrives."
   },
   {
    "id": "s13",
    "scene": "S13",
-   "start": 99.2,
-   "end": 104.88,
+   "start": 121.167,
+   "end": 126.847,
    "caption": "On a live quote today, the payout leg cost one percent over the partner's own rate."
   },
   {
    "id": "s14",
    "scene": "S14",
-   "start": 105.767,
-   "end": 110.087,
+   "start": 127.7,
+   "end": 132.02,
    "caption": "Real payouts are next, and every number will come from our proof script."
   },
   {
    "id": "s15",
    "scene": "S15",
-   "start": 112.7,
-   "end": 122.02,
+   "start": 134.8,
+   "end": 144.12,
    "caption": "Shares land in M-Pesa, not a group wallet. Paid means a receipt. Everyone signs with Nimiq. No treasurer holds the pot."
   },
   {
    "id": "s16",
    "scene": "S16",
-   "start": 122.967,
-   "end": 129.767,
+   "start": 145.033,
+   "end": 151.833,
    "caption": "Friday again. Wanjiru's phone buzzes: five thousand shillings, and a receipt for every share."
   },
   {
    "id": "s17",
    "scene": "S17",
-   "start": 130.633,
-   "end": 133.713,
+   "start": 152.667,
+   "end": 155.747,
    "caption": "Zamu. Open it in Nimiq Pay."
   }
  ]

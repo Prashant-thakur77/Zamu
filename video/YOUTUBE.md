@@ -12,17 +12,18 @@ Open it in Nimiq Pay: Mini Apps → Custom URL → zamu.prashantthakur.dev
 Live site: https://zamu.prashantthakur.dev
 Code (MIT): https://github.com/Prashant-thakur77/Zamu
 
-Product scenes are the real app, labelled on screen (local test with a mock wallet and payout partner, or the demo chama). Real-money payouts are next; every number will come from scripts/proof.ts.
+Product scenes are the real app: recorded inside Nimiq Pay on a phone, or a labelled local test where a second member is needed. The payment flow is the demo chama or a labelled local test. Real-money payouts are next; every number will come from scripts/proof.ts.
 
 Chapters:
 0:00 One treasurer, everyone trusts them
 0:23 This is Zamu
-0:28 Start, join, sign with Nimiq
-0:45 How a round works
-1:00 Paid means a receipt; never pay twice
-1:21 Under the hood
-1:38 Live quote and proof script
-1:50 What nobody else does
+0:28 Inside Nimiq Pay on a real phone
+0:41 Start a chama, invite your group
+1:07 How a round works
+1:22 Paid means a receipt; never pay twice
+1:43 Under the hood
+2:00 Live quote and proof script
+2:12 What nobody else does
 
 **Captions:** upload `video/film/public/captions/film.srt` as English subtitles.
 **Thumbnail:** `video/out/thumbnail.png`.

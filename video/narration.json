@@ -34,24 +34,48 @@
  {
   "scene": "S5",
   "id": "s5",
-  "caption": "Inside Nimiq Pay, Wanjiru starts the chama: the share, how often, how many.",
-  "spoken": "Inside Nimiq Pay, Wanjiru starts the chama: the share, how often, how many.",
+  "caption": "This is the real app, inside Nimiq Pay on a phone. Open it from Mini Apps.",
+  "spoken": "This is the real app, inside Nimiq Pay on a phone. Open it from Mini Apps.",
+  "exaggeration": 0.5,
+  "cfg": 0.5
+ },
+ {
+  "scene": "S5b",
+  "id": "s5b",
+  "caption": "Sign in by signing a message with your own Nimiq key. Nobody types a password.",
+  "spoken": "Sign in by signing a message with your own Nimiq key. Nobody types a password.",
   "exaggeration": 0.5,
   "cfg": 0.5
  },
  {
   "scene": "S6",
   "id": "s6",
-  "caption": "Friends join with a code, and the M-Pesa number their turn is paid to.",
-  "spoken": "Friends join with a code, and the M-Pesa number their turn is paid to.",
+  "caption": "Start a chama: the share, how often, how many, and the M-Pesa number your turn is paid to.",
+  "spoken": "Start a chama: the share, how often, how many, and the M-Pesa number your turn is paid to.",
+  "exaggeration": 0.5,
+  "cfg": 0.5
+ },
+ {
+  "scene": "S6e",
+  "id": "s6e",
+  "caption": "Ask for less than fifteen shillings, and Zamu says so before anything is saved.",
+  "spoken": "Ask for less than fifteen shillings, and Zamu says so before anything is saved.",
+  "exaggeration": 0.5,
+  "cfg": 0.5
+ },
+ {
+  "scene": "S6i",
+  "id": "s6i",
+  "caption": "Then share the invite code, or the QR code, with your group.",
+  "spoken": "Then share the invite code, or the QR code, with your group.",
   "exaggeration": 0.5,
   "cfg": 0.5
  },
  {
   "scene": "S7",
   "id": "s7",
-  "caption": "Then everyone signs the agreement with their own Nimiq key.",
-  "spoken": "Then everyone signs the agreement with their own Nimiq key.",
+  "caption": "When everyone has joined, each member signs the agreement with their own Nimiq key.",
+  "spoken": "When everyone has joined, each member signs the agreement with their own Nimiq key.",
   "exaggeration": 0.5,
   "cfg": 0.5
  },

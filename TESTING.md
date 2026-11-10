@@ -66,9 +66,24 @@ Also on production: the Playwright screen tests (first screen, Swahili, demo cha
 - "Agreement signed by n/total" moved out of sight when tabs were added; it is back in the chama header.
 - Database migrations could not run from a developer machine whose network blocks port 5432; they now run from a Lambda inside AWS.
 
+## On a real phone, inside Nimiq Pay (mainnet)
+
+Recorded on an Android phone on 11 Nov 2026 (the film's phone shots come from this recording):
+
+| Check | Result |
+| --- | --- |
+| Open from Nimiq Pay → Mini Apps (Custom URL / Discover search) | pass |
+| Sign in: Nimiq Pay's Connect prompt, then its Sign Message prompt showing "Sign in to Zamu" with the server's nonce; the server verified the signature and signed the member in | pass: real `nimiq.sign()` signatures verify on the server |
+| Create a chama with an M-Pesa payout; KSh 10 refused with "A share must be between KSh 15 and KSh 50,000", then KSh 20 accepted | pass |
+| Invite screen: code, QR code, copy link; "You need at least 2 members to start" | pass |
+| Home, planner, Help, tab bar, the phone's dark theme | pass |
+| Demo chama: Pay → invoice → Sent → Delivered with the M-Pesa receipt | pass |
+
+Note: Nimiq Pay's QR scanner only opens Mini Apps that are listed in its directory. Until listing opens, Zamu is opened by typing the address in Mini Apps → Custom URL.
+
 ## Not run here
 
-- Nimiq testnet inside Nimiq Pay on a phone (sign-in, agreement signing, staking, NIM payout) needs a phone with Nimiq Pay; steps are in the real-money checklist below.
+- A real round needs a second member with their own Nimiq Pay account, so agreement signing, a real Lightning payment and staking were not run on a phone.
 - Real Lightning payouts to M-Pesa: not done; waiting for the real-money test.
 
 ## Real-money test (to run once, by hand)
