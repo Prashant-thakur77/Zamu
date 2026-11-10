@@ -35,7 +35,7 @@
     "jose": "^6.2.10",
     "light-bolt11-decoder": "^3.2.0",
     "lucide-react": "^1.39.0",
-    "next": "16.3.3",
+    "next": "16.4.6",
     "postgres": "^4.1.0",
     "react": "19.2.8",
     "react-dom": "19.2.8"
@@ -49,6 +49,7 @@
     "@types/react-dom": "^19",
     "bolt11": "^1.4.2",
     "drizzle-kit": "^0.31.10",
+    "sst": "^4.17.2",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5"

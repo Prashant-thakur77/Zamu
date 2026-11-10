@@ -49,3 +49,9 @@ next-env.d.ts
 .design-refs/
 .shots/
 test-results/
+
+# sst
+.sst/
+.open-next/
+infra/env.sh
+.lambda/
