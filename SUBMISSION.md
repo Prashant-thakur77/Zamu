@@ -10,6 +10,6 @@ It is for Kenyan and diaspora chama members. The person receiving needs nothing 
 
 Nobody holds the pot, so there is no treasurer to trust. An optional rule skips a member's turn until they have paid every share due, and each member's on-time record is visible. Members can keep NIM staked for their next shares and get told when to unstake.
 
-Proof, from our script against the live database: PROOF_N payouts delivered, median PROOF_MEDIAN seconds from tap to M-Pesa, KSh PROOF_KES delivered, payout-leg cost PROOF_COST over the partner's published rate.
+What we verified: Zamu runs on mainnet inside Nimiq Pay on a phone, where sign-in is a real nimiq.sign() signature checked by the server. A live payout quote for KSh 1,000 cost 1% over the partner's published rate. 35 live checks and 59 automated tests pass. Real payouts are next, and every number will come from our proof script.
 
 Limits: members need NIM or USDT first; payouts go to phone numbers only (no Paybill or Till); the minimum share is KSh 15; the partner holds funds for seconds between Lightning and M-Pesa.
