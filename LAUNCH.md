@@ -33,3 +33,8 @@ Video: https://youtu.be/l7_HeIk76Ig
 Code (MIT): https://github.com/Prashant-thakur77/Zamu
 
 Feedback very welcome, especially from anyone who's in a chama.
+
+## Published
+
+- X: https://x.com/2730Thakur12618/status/2120233985637060966
+- Video: https://youtu.be/l7_HeIk76Ig
