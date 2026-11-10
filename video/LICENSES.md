@@ -4,7 +4,7 @@ Kept so credits can be added by the project owner if wanted. Nothing here is sho
 
 | Asset | Source | Licence | Used for |
 | --- | --- | --- | --- |
-| Narrator voice reference `refs/narrator.wav` (`female_energetic_B`) | Expresso speaker, from the owner's voice library (~/Downloads/meta-winner-films/voice-samples/clean) | see VOICES.md in that library; approved by the owner for prize films | Chatterbox voice clone for all narration |
+| Narrator voice reference `refs/narrator.wav` (`female_energetic_B`) | Expresso dataset speaker, from the owner's voice-reference library | see VOICES.md in that library; approved by the owner for prize films | Chatterbox voice clone for all narration |
 | Chatterbox TTS | Resemble AI, `chatterbox-tts` | MIT | narration synthesis |
 | Music `audio/music.wav` | composed in `music.py` (numpy synthesis) | original | score |
 | Effects `audio/sfx/*` | synthesised by `sfx_synth.py` | original | effects |

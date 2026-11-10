@@ -34,7 +34,7 @@ async function main() {
       label: 'Kenyan adults in chamas and other savings groups',
       source: 'FinAccess Household Survey 2024 (CBK, KNBS, FSD Kenya)',
     },
-    tests: { unit: 24, integration: 9, e2e: 12, liveChecks: 30, source: 'TESTING.md' },
+    tests: { unit: 24, integration: 10, e2e: 15, liveChecks: 35, source: 'TESTING.md' },
     live: { url: 'https://zamu.prashantthakur.dev', healthy: live?.ok === true },
   }
   mkdirSync('video/film/public', { recursive: true })

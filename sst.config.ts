@@ -141,6 +141,19 @@ export default $config({
       },
     })
 
+    // The alert address lives outside the repo: BUDGET_EMAIL, or ~/.config/zamu/budget-email.
+    const fs = await import('node:fs')
+    const os = await import('node:os')
+    const budgetEmail =
+      process.env.BUDGET_EMAIL ||
+      (() => {
+        try {
+          return fs.readFileSync(`${os.homedir()}/.config/zamu/budget-email`, 'utf8').trim()
+        } catch {
+          return ''
+        }
+      })()
+
     new aws.budgets.Budget('MonthlyBudget', {
       name: `zamu-${$app.stage}-monthly`,
       budgetType: 'COST',
@@ -148,8 +161,8 @@ export default $config({
       limitUnit: 'USD',
       timeUnit: 'MONTHLY',
       notifications: [
-        { comparisonOperator: 'GREATER_THAN', threshold: 80, thresholdType: 'PERCENTAGE', notificationType: 'ACTUAL', subscriberEmailAddresses: [process.env.BUDGET_EMAIL ?? ''] },
-        { comparisonOperator: 'GREATER_THAN', threshold: 100, thresholdType: 'PERCENTAGE', notificationType: 'FORECASTED', subscriberEmailAddresses: [process.env.BUDGET_EMAIL ?? ''] },
+        { comparisonOperator: 'GREATER_THAN', threshold: 80, thresholdType: 'PERCENTAGE', notificationType: 'ACTUAL', subscriberEmailAddresses: [budgetEmail] },
+        { comparisonOperator: 'GREATER_THAN', threshold: 100, thresholdType: 'PERCENTAGE', notificationType: 'FORECASTED', subscriberEmailAddresses: [budgetEmail] },
       ],
     })
 

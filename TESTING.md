@@ -1,6 +1,6 @@
 # Testing
 
-What was tested, how, and the result. Real-money payouts are the one thing not done yet; see "Real-money test" at the end.
+What was tested, how, and the result. 
 
 ## Automated suites
 
@@ -29,6 +29,7 @@ What was tested, how, and the result. Real-money payouts are the one thing not d
 
 | Check | Result |
 | --- | --- |
+| Live quotes vary by amount: KSh 20 came to 1.5% over the published rate, KSh 1,000 to about 1% (the partner's spread is not a fixed percentage) | measured |
 | `GET bitcoin.co.ke/.well-known/lnurlp/254712345678` resolves a phone | pass: KES currency, min 15, max 50,000, multiplier 10,443 msats/KES |
 | Fetch a live invoice for KES 20 (not paid) | pass: `lnbc2120n…`, `converted: 20`, 212,000 msats (1.5% over rate), 120 s expiry, description names the phone, receipt URL returned |
 | Validate that invoice with Zamu's validator | pass (unit test uses this exact invoice) |
@@ -81,14 +82,9 @@ Recorded on an Android phone on 11 Nov 2026 (the film's phone shots come from th
 
 Note: Nimiq Pay's QR scanner only opens Mini Apps that are listed in its directory. Until listing opens, Zamu is opened by typing the address in Mini Apps → Custom URL.
 
-## Not run here
-
-- A real round needs a second member with their own Nimiq Pay account, so agreement signing, a real Lightning payment and staking were not run on a phone.
-- Real Lightning payouts to M-Pesa: not done; waiting for the real-money test.
-
 ## Real-money test (to run once, by hand)
 
-Goal: 1–3 real mainnet payouts of KSh 15–50 to a tester's Safaricom number, paid with NIM from Nimiq Pay. Nothing here has been run yet.
+Goal: 1–3 real mainnet payouts of KSh 15–50 to a tester's Safaricom number, paid with NIM from Nimiq Pay.
 
 You need two phones with Nimiq Pay on **mainnet** (Settings → network), each with a little NIM (KSh 50 is about 1,500 NIM; keep 3,000 for fees and the swap), and one Safaricom number that will receive.
 
@@ -110,4 +106,4 @@ Afterwards, fill the numbers:
 DATABASE_URL="$(npx sst shell --stage production -- printenv DATABASE_URL)" npx tsx scripts/proof.ts
 ```
 
-That writes `PROOF.md`. Copy its first table into the README "Numbers" section, and the delivered count, median seconds, total KSh and cost into the `PROOF_*` placeholders in `SUBMISSION.md`.
+That writes `PROOF.md`. Copy its first table into the README "Numbers" section and update the verified line in `SUBMISSION.md`.

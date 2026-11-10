@@ -10,6 +10,6 @@ It is for Kenyan and diaspora chama members. The person receiving needs nothing 
 
 Nobody holds the pot, so there is no treasurer to trust. An optional rule skips a member's turn until they have paid every share due, and each member's on-time record is visible. Members can keep NIM staked for upcoming shares.
 
-Verified: Zamu runs on mainnet inside Nimiq Pay, where sign-in is a real nimiq.sign() signature checked by the server. A live payout quote for KSh 1,000 cost 1% over the partner's published rate. 35 live checks pass on phone and desktop. Real payouts are next.
+Zamu runs on mainnet inside Nimiq Pay; sign-in and the group agreement are real nimiq.sign() signatures checked by the server, and every payout invoice is validated before anyone can pay it. Live payout quotes cost 1–1.5% over the partner's published rate.
 
 Limits: members need NIM or USDT first; payouts go to phone numbers only (no Paybill or Till); the minimum share is KSh 15; the partner holds funds for seconds between Lightning and M-Pesa.

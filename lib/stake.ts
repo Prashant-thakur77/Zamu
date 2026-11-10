@@ -36,7 +36,8 @@ export async function listValidators(): Promise<Validator[]> {
         fee: Number(v.fee ?? 0),
         payoutType: String(v.payoutType ?? 'none'),
         score: Number((v.score as { total?: number } | number | undefined) && typeof v.score === 'object' ? (v.score as { total?: number }).total : v.score) || 0,
-        logo: typeof v.logo === 'string' ? v.logo : null,
+        // Logos arrive as large inline images; the reserve screen doesn't show them.
+        logo: null,
       }))
       .filter((v) => v.payoutType !== 'none')
       .sort((a, b) => b.score - a.score)
