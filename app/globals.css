@@ -1,82 +1,223 @@
 @import "tailwindcss";
 
 /*
-  Zamu's palette: adire indigo against blue-biased neutrals. Deliberately not
-  the default crypto purple.
+  Zamu: matte paper, chai ink, kanga borders.
+  Green means money delivered and nothing else. Turmeric marks the turn.
+  Clay marks what is overdue or failed. Buttons are solid ink, like a stamp.
 */
 :root {
-  --bg: #f6f7fb;
-  --surface: #ffffff;
-  --surface-2: #edeff8;
-  --border: #e1e3f0;
-  --ink: #141629;
-  --muted: #5a5e7a;
-  --faint: #8b90ac;
-  --accent: #3a44a8;
-  --accent-ink: #ffffff;
-  --good: #177a57;
-  --good-bg: #e4f3ec;
-  --warn: #a5680e;
-  --warn-bg: #f8efdc;
-  --risk: #a32f2c;
-  --risk-bg: #f9e7e6;
+  --paper: #f3ecdf;
+  --paper-2: #e9dfcd;
+  --card: #fbf7ef;
+  --rule: #d6c8b1;
+  --ink: #1d1712;
+  --ink-2: #5a4e42;
+  --ink-3: #8a7b6a;
+  --leaf: #127a3a;
+  --leaf-bright: #2fa84f;
+  --leaf-bg: #dcefd9;
+  --sun: #f0ac16;
+  --sun-bg: #fbe7b5;
+  --clay: #b0402c;
+  --clay-bg: #f4d9cf;
+  --press: #1d1712;
+  --press-ink: #f8f1e4;
+  --ease-stamp: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-firm: cubic-bezier(0.3, 0.7, 0.1, 1);
+  --ease-turn: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-press: cubic-bezier(0.83, 0, 0.17, 1);
+  --t-snap: 180ms;
+  --t-firm: 260ms;
+  --t-slide: 340ms;
+  --t-turn: 1000ms;
+  color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #0e1020;
-    --surface: #181b2e;
-    --surface-2: #1f2338;
-    --border: #292d45;
-    --ink: #e9eaf4;
-    --muted: #9aa0be;
-    --faint: #757b9b;
-    --accent: #8e97f0;
-    --accent-ink: #0e1020;
-    --good: #4fcb9b;
-    --good-bg: #14352a;
-    --warn: #e8b04b;
-    --warn-bg: #3a2e14;
-    --risk: #f08a85;
-    --risk-bg: #3a1e1d;
+    --paper: #16110c;
+    --paper-2: #211a13;
+    --card: #1d1610;
+    --rule: #3a2f24;
+    --ink: #f3ead9;
+    --ink-2: #c4b49c;
+    --ink-3: #8c7c67;
+    --leaf: #4cc46b;
+    --leaf-bright: #5fd47d;
+    --leaf-bg: #123620;
+    --sun: #f5b83a;
+    --sun-bg: #3d2d0c;
+    --clay: #ef8a73;
+    --clay-bg: #3d1a12;
+    --press: #f3ead9;
+    --press-ink: #16110c;
+    color-scheme: dark;
   }
 }
 
 @theme inline {
-  --color-bg: var(--bg);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-border: var(--border);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-rule: var(--rule);
   --color-ink: var(--ink);
-  --color-muted: var(--muted);
-  --color-faint: var(--faint);
-  --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
-  --color-good: var(--good);
-  --color-good-bg: var(--good-bg);
-  --color-warn: var(--warn);
-  --color-warn-bg: var(--warn-bg);
-  --color-risk: var(--risk);
-  --color-risk-bg: var(--risk-bg);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-leaf: var(--leaf);
+  --color-leaf-bright: var(--leaf-bright);
+  --color-leaf-bg: var(--leaf-bg);
+  --color-sun: var(--sun);
+  --color-sun-bg: var(--sun-bg);
+  --color-clay: var(--clay);
+  --color-clay-bg: var(--clay-bg);
+  --color-press: var(--press);
+  --color-press-ink: var(--press-ink);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono: var(--font-mono);
 }
 
 html,
 body {
-  background: var(--bg);
+  background: var(--paper);
   color: var(--ink);
 }
 
 body {
   font-family: var(--font-body), system-ui, -apple-system, sans-serif;
-  /* Respect the phone's notch when running full-bleed inside the WebView. */
-  padding-bottom: env(safe-area-inset-bottom);
   -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+  -webkit-tap-highlight-color: transparent;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* The WebView happily bounces the whole page otherwise. */
-body {
-  overscroll-behavior-y: none;
+/* Matte paper grain, drawn once, never animated. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.28 0 0 0 0 0.2 0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+@media (prefers-color-scheme: dark) {
+  body::before {
+    mix-blend-mode: screen;
+    opacity: 0.18;
+  }
+}
+
+/* Inputs at 16px: iOS never zooms the WebView on focus. */
+input,
+select,
+textarea {
+  font-size: 16px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--sun);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-body), sans-serif;
+  font-stretch: 88%;
+}
+
+/* Matatu sign-writing: heavy condensed caps with a hard ink shadow. */
+.signwrite {
+  font-family: var(--font-display), sans-serif;
+  font-stretch: 62%;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.88;
+}
+.shadow-hard {
+  box-shadow: 3px 3px 0 0 var(--ink);
+  border: 1.5px solid var(--ink);
+}
+.seal {
+  transform: rotate(-8deg);
+}
+
+/* Tabular figures everywhere money appears. */
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+}
+
+/* Kanga hem: a printed band of diamonds and dots. */
+.kanga-band {
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--sun) 0 2.2px, transparent 2.6px),
+    linear-gradient(45deg, transparent 46%, var(--clay) 46% 54%, transparent 54%),
+    linear-gradient(-45deg, transparent 46%, var(--clay) 46% 54%, transparent 54%);
+  background-size: 14px 14px, 14px 14px, 14px 14px;
+  background-position: 0 0, 7px 0, 7px 0;
+}
+
+/* Treasurer's book: ruled rows. */
+.ruled > * + * {
+  border-top: 1px solid var(--rule);
+}
+
+/* Motion. Everything below is skipped for reduced motion. */
+@keyframes stamp-in {
+  0% { transform: scale(1.15) rotate(-8deg); opacity: 0; }
+  100% { transform: scale(1) rotate(-8deg); opacity: 1; }
+}
+@keyframes slip-up {
+  from { transform: translateY(18px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes sheet-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.55; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+@keyframes print {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+.anim-stamp { animation: stamp-in 220ms var(--ease-stamp) both; }
+.anim-slip { animation: slip-up var(--t-slide) var(--ease-firm) both; }
+.anim-sheet { animation: sheet-up var(--t-slide) var(--ease-firm) both; }
+.anim-fade { animation: fade-in var(--t-firm) ease-out both; }
+.anim-print { animation: print 240ms steps(8, end) both; }
+.spinner { animation: spin 800ms linear infinite; }
+.pulse-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid var(--sun);
+  animation: pulse-ring 1600ms var(--ease-firm) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+  .spinner { animation: spin 1600ms linear infinite !important; animation-iteration-count: infinite !important; animation-duration: 1600ms !important; }
 }

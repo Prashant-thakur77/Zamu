@@ -44,3 +44,8 @@ next-env.d.ts
 
 # local agent settings
 .claude/settings.local.json
+
+# design reference captures (local only)
+.design-refs/
+.shots/
+test-results/

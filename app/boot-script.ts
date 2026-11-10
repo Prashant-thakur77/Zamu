@@ -27,6 +27,12 @@ export const BOOT_SCRIPT = `
     }
   } catch (e) {}
 
+})();
+`
+
+/** Development only: show uncaught errors on screen, since a phone has no console. */
+export const DEV_ERROR_SCRIPT = `
+(function () {
   var queue = [];
   function paint(msg) {
     try {

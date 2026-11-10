@@ -137,3 +137,14 @@ test('invite and nudge messages are WhatsApp friendly', () => {
   const nudge = buildNudgeMessage({ chamaName: 'X', shareKes: 500, recipientName: 'Wanjiru', dueAt: t0.toISOString(), outstanding: ['Otieno'], url: link })
   assert.match(nudge, /Otieno still owes KSh 500/)
 })
+
+test('every English string has a Swahili translation', async () => {
+  const { dict } = await import('../../lib/i18n')
+  const en = Object.keys(dict.en).sort()
+  const sw = Object.keys(dict.sw).sort()
+  assert.deepEqual(sw, en)
+  for (const k of en) {
+    const vars = (s: string) => (s.match(/\{\w+\}/g) ?? []).sort().join()
+    assert.equal(vars((dict.sw as Record<string, string>)[k]), vars((dict.en as Record<string, string>)[k]), k)
+  }
+})

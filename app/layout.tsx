@@ -1,65 +1,55 @@
-import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google";
-import { ZamuProvider } from "@/components/zamu-provider";
-import { BOOT_SCRIPT } from "./boot-script";
-import "./globals.css";
+import type { Metadata, Viewport } from 'next'
+import { Archivo, Instrument_Sans, JetBrains_Mono } from 'next/font/google'
+import { AppProvider } from '@/components/app-provider'
+import { BOOT_SCRIPT, DEV_ERROR_SCRIPT } from './boot-script'
+import './globals.css'
 
-const display = Space_Grotesk({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["500", "700"],
-});
+const display = Archivo({ variable: '--font-display', subsets: ['latin'], axes: ['wdth'] })
+const body = Instrument_Sans({ variable: '--font-body', subsets: ['latin'] })
+const mono = JetBrains_Mono({ variable: '--font-mono', subsets: ['latin'], weight: ['400', '600'] })
 
-const body = Inter({
-  variable: "--font-body",
-  subsets: ["latin"],
-});
-
+const title = 'Zamu: your chama, paid straight to M-Pesa'
 const description =
-  "A rotating savings circle on USDT. Ten people put in $50 a week, one person takes the whole pot, and it rotates until everyone has had their turn.";
+  'A chama where, when it’s your turn, everyone’s share lands straight in your M-Pesa in exact shillings, and the whole group sees every receipt. Runs inside Nimiq Pay.'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
-  title: "Zamu — nobody holds the money",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  title,
   description,
-  openGraph: {
-    title: "Zamu — nobody holds the money",
-    description,
-    siteName: "Zamu",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Zamu — nobody holds the money",
-    description,
-  },
-};
+  applicationName: 'Zamu',
+  openGraph: { title, description, siteName: 'Zamu', type: 'website' },
+  twitter: { card: 'summary_large_image', title, description },
+}
 
 export const viewport: Viewport = {
-  width: "device-width",
+  width: 'device-width',
   initialScale: 1,
-  // A WebView that pinch-zooms feels broken, not flexible.
   maximumScale: 1,
   userScalable: false,
-  viewportFit: "cover",
-};
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f3ecdf' },
+    { media: '(prefers-color-scheme: dark)', color: '#16110c' },
+  ],
+}
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} h-full antialiased`}
-      // Nimiq Pay injects --safe-area-inset-* onto <html> before React
-      // hydrates, which React otherwise reports as a mismatch it cannot patch.
+      className={`${display.variable} ${body.variable} ${mono.variable} h-full`}
+      // Nimiq Pay sets safe-area variables on <html> before hydration.
       suppressHydrationWarning
     >
       <head>
-        {/* Must run before Next's runtime. See boot-script.ts for why. */}
         <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
+        {process.env.NODE_ENV !== 'production' && <script dangerouslySetInnerHTML={{ __html: DEV_ERROR_SCRIPT }} />}
       </head>
-      <body className="min-h-full flex flex-col">
-        <ZamuProvider>{children}</ZamuProvider>
+      <body className="relative min-h-full">
+        <AppProvider>
+          <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-[480px] flex-col">{children}</div>
+        </AppProvider>
       </body>
     </html>
-  );
+  )
 }
