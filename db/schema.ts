@@ -1,5 +1,6 @@
 import {
   bigint,
+  boolean,
   index,
   integer,
   pgEnum,
@@ -13,92 +14,84 @@ import {
 /**
  * Zamu's schema.
  *
- * Two conventions worth knowing before reading further:
- *
- *  - EVM addresses are stored lowercased. Checksummed casing varies by source,
- *    and a case-sensitive comparison against an on-chain log would silently
- *    miss real payments. Normalise on the way in, always.
- *
- *  - Money is stored as the raw on-chain integer, never a decimal. USDT uses 6
- *    decimals, so 50 USDT is 50_000_000n. Formatting happens at the edge.
+ *  - Identity is a Nimiq address, stored in its spaced user-friendly form
+ *    ("NQ07 0000 …"), proven by a signed message at sign-in.
+ *  - Shares are whole Kenyan shillings. Lightning amounts are msats/sats,
+ *    NIM amounts are Luna (1 NIM = 100,000 Luna).
+ *  - A share's state lives on its invoice row; there is exactly one per member
+ *    per round, and it is never replaced once it may have been paid.
  */
 
-export const tokenEnum = pgEnum('token', ['USDT_POLYGON', 'NIM'])
 export const frequencyEnum = pgEnum('frequency', ['daily', 'weekly', 'biweekly', 'monthly'])
-export const circleStatusEnum = pgEnum('circle_status', [
-  'forming',
-  'active',
-  'completed',
-  'broken',
-])
-export const memberStatusEnum = pgEnum('member_status', ['active', 'defaulted', 'left'])
-export const roundStatusEnum = pgEnum('round_status', [
-  'upcoming',
-  'open',
-  'settling',
-  'complete',
-])
-export const contributionStatusEnum = pgEnum('contribution_status', [
-  'pending',
-  'confirmed',
+export const chamaStatusEnum = pgEnum('chama_status', ['forming', 'signing', 'active', 'completed', 'cancelled'])
+export const roundStatusEnum = pgEnum('round_status', ['upcoming', 'open', 'complete'])
+export const payoutMethodEnum = pgEnum('payout_method', ['mpesa', 'lightning', 'nim'])
+export const invoiceStatusEnum = pgEnum('invoice_status', [
+  'issued',
+  'submitted',
+  'checking',
+  'delivered',
   'failed',
-  'late',
-  'missed',
-])
-export const reputationKindEnum = pgEnum('reputation_kind', [
-  'paid_on_time',
-  'paid_late',
-  'missed',
+  'expired',
 ])
 
 export const users = pgTable('users', {
-  // The EVM address is the identity. No passwords, no email.
   address: text('address').primaryKey(),
-  nimAddress: text('nim_address'),
   displayName: text('display_name'),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
 })
 
-export const circles = pgTable(
-  'circles',
+export const chamas = pgTable(
+  'chamas',
   {
     id: uuid('id').primaryKey().defaultRandom(),
     name: text('name').notNull(),
-    token: tokenEnum('token').notNull().default('USDT_POLYGON'),
-    // Raw on-chain units. 50 USDT = 50000000.
-    contributionAmount: bigint('contribution_amount', { mode: 'bigint' }).notNull(),
+    /** Each member's share per round, whole KSh. */
+    shareKes: integer('share_kes').notNull(),
     frequency: frequencyEnum('frequency').notNull(),
-    // How many members the circle is built for; also the number of rounds.
     size: integer('size').notNull(),
-    status: circleStatusEnum('status').notNull().default('forming'),
+    status: chamaStatusEnum('status').notNull().default('forming'),
     creatorAddress: text('creator_address')
       .notNull()
       .references(() => users.address),
     inviteCode: text('invite_code').notNull(),
+    /** A member's turn is skipped until they have paid every share due so far. */
+    skipUntilPaidUp: boolean('skip_until_paid_up').notNull().default(true),
     startsAt: timestamp('starts_at', { withTimezone: true }),
     lockedAt: timestamp('locked_at', { withTimezone: true }),
+    activatedAt: timestamp('activated_at', { withTimezone: true }),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
-  (t) => [uniqueIndex('circles_invite_code_idx').on(t.inviteCode)],
+  (t) => [uniqueIndex('chamas_invite_code_idx').on(t.inviteCode)],
 )
 
 export const members = pgTable(
   'members',
   {
     id: uuid('id').primaryKey().defaultRandom(),
-    circleId: uuid('circle_id')
+    chamaId: uuid('chama_id')
       .notNull()
-      .references(() => circles.id, { onDelete: 'cascade' }),
+      .references(() => chamas.id, { onDelete: 'cascade' }),
     address: text('address')
       .notNull()
       .references(() => users.address),
-    // Fixed when the circle locks, visible to everyone before they commit.
+    /** The name this member signs the agreement with. */
+    displayName: text('display_name').notNull(),
     payoutPosition: integer('payout_position'),
-    status: memberStatusEnum('status').notNull().default('active'),
+    payoutMethod: payoutMethodEnum('payout_method').notNull().default('mpesa'),
+    /** 2547XXXXXXXX / 2541XXXXXXXX. Only ever shown to members of this chama. */
+    payoutPhone: text('payout_phone'),
+    payoutLightning: text('payout_lightning'),
+    payoutNim: text('payout_nim'),
+    consentAt: timestamp('consent_at', { withTimezone: true }).notNull(),
+    agreementMessage: text('agreement_message'),
+    agreementPublicKey: text('agreement_public_key'),
+    agreementSignature: text('agreement_signature'),
+    agreementSignedAt: timestamp('agreement_signed_at', { withTimezone: true }),
     joinedAt: timestamp('joined_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
-    uniqueIndex('members_circle_address_idx').on(t.circleId, t.address),
+    uniqueIndex('members_chama_address_idx').on(t.chamaId, t.address),
     index('members_address_idx').on(t.address),
   ],
 )
@@ -107,88 +100,88 @@ export const rounds = pgTable(
   'rounds',
   {
     id: uuid('id').primaryKey().defaultRandom(),
-    circleId: uuid('circle_id')
+    chamaId: uuid('chama_id')
       .notNull()
-      .references(() => circles.id, { onDelete: 'cascade' }),
-    // 1-based, matching what members see.
+      .references(() => chamas.id, { onDelete: 'cascade' }),
     index: integer('index').notNull(),
     recipientAddress: text('recipient_address').notNull(),
+    /** Set when the skip-until-paid-up rule moved the original recipient later. */
+    skippedAddress: text('skipped_address'),
     opensAt: timestamp('opens_at', { withTimezone: true }).notNull(),
     dueAt: timestamp('due_at', { withTimezone: true }).notNull(),
     status: roundStatusEnum('status').notNull().default('upcoming'),
+    /** Tando's msats-per-KES, fixed for the round so every member converts alike. */
+    msatsPerKes: integer('msats_per_kes'),
+    /** NIM conversion for NIM payouts, fixed for the round. */
+    lunaPerKes: bigint('luna_per_kes', { mode: 'number' }),
+    completedAt: timestamp('completed_at', { withTimezone: true }),
   },
-  (t) => [uniqueIndex('rounds_circle_index_idx').on(t.circleId, t.index)],
+  (t) => [uniqueIndex('rounds_chama_index_idx').on(t.chamaId, t.index)],
 )
 
-export const contributions = pgTable(
-  'contributions',
+export const invoices = pgTable(
+  'invoices',
   {
     id: uuid('id').primaryKey().defaultRandom(),
     roundId: uuid('round_id')
       .notNull()
       .references(() => rounds.id, { onDelete: 'cascade' }),
-    fromAddress: text('from_address').notNull(),
-    toAddress: text('to_address').notNull(),
-    amount: bigint('amount', { mode: 'bigint' }).notNull(),
-    // Null until the member actually sends. Unique when present so the same
-    // transfer can never be credited twice — the fast path and the log sweep
-    // both write here and must converge, not duplicate.
-    txHash: text('tx_hash'),
-    blockNumber: bigint('block_number', { mode: 'bigint' }),
-    status: contributionStatusEnum('status').notNull().default('pending'),
-    confirmedAt: timestamp('confirmed_at', { withTimezone: true }),
+    member: text('member').notNull(),
+    method: payoutMethodEnum('method').notNull(),
+    recipientAddress: text('recipient_address').notNull(),
+    recipientPhone: text('recipient_phone'),
+    recipientLightning: text('recipient_lightning'),
+    recipientNim: text('recipient_nim'),
+    kes: integer('kes').notNull(),
+    sats: integer('sats'),
+    msats: bigint('msats', { mode: 'number' }),
+    luna: bigint('luna', { mode: 'number' }),
+    bolt11: text('bolt11'),
+    paymentHash: text('payment_hash'),
+    receiptUrl: text('receipt_url'),
+    verifyUrl: text('verify_url'),
+    expiresAt: timestamp('expires_at', { withTimezone: true }),
+    status: invoiceStatusEnum('status').notNull().default('issued'),
+    /** Hash Nimiq Pay returned for the NIM/USDT transaction that paid this. */
+    nimiqHash: text('nimiq_hash'),
+    swapId: text('swap_id'),
+    receiptCode: text('receipt_code'),
+    kesDelivered: integer('kes_delivered'),
+    failureReason: text('failure_reason'),
+    recipientConfirmedAt: timestamp('recipient_confirmed_at', { withTimezone: true }),
+    tappedAt: timestamp('tapped_at', { withTimezone: true }).notNull().defaultNow(),
+    submittedAt: timestamp('submitted_at', { withTimezone: true }),
+    deliveredAt: timestamp('delivered_at', { withTimezone: true }),
+    lastCheckedAt: timestamp('last_checked_at', { withTimezone: true }),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => [
-    uniqueIndex('contributions_round_from_idx').on(t.roundId, t.fromAddress),
-    uniqueIndex('contributions_tx_hash_idx').on(t.txHash),
+    uniqueIndex('invoices_round_member_idx').on(t.roundId, t.member),
+    uniqueIndex('invoices_payment_hash_idx').on(t.paymentHash),
+    uniqueIndex('invoices_nimiq_hash_idx').on(t.nimiqHash),
+    index('invoices_status_idx').on(t.status),
   ],
 )
 
-export const reputationEvents = pgTable(
-  'reputation_events',
+/** NIM staked as a reserve for future shares. One row per transaction. */
+export const stakeEvents = pgTable(
+  'stake_events',
   {
     id: uuid('id').primaryKey().defaultRandom(),
     address: text('address').notNull(),
-    circleId: uuid('circle_id').references(() => circles.id, { onDelete: 'cascade' }),
-    roundId: uuid('round_id').references(() => rounds.id, { onDelete: 'cascade' }),
-    kind: reputationKindEnum('kind').notNull(),
+    kind: text('kind').notNull(), // 'stake' | 'retire' | 'remove'
+    luna: bigint('luna', { mode: 'number' }).notNull(),
+    validator: text('validator'),
+    txHash: text('tx_hash'),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   },
-  (t) => [
-    index('reputation_address_idx').on(t.address),
-    // One event per member per round. Both verification paths can confirm the
-    // same payment, and control flow alone is too fragile to keep streaks
-    // honest — let the database refuse the duplicate, as tx_hash already does.
-    uniqueIndex('reputation_address_round_idx').on(t.address, t.roundId),
-  ],
+  (t) => [index('stake_events_address_idx').on(t.address)],
 )
 
-/**
- * Issued sign-in nonces.
- *
- * The nonce also travels in a signed cookie, but that alone cannot enforce
- * single use: deleting a cookie only clears the client's copy, so a captured
- * signature plus cookie could be replayed for a fresh session. This table is
- * the authority — consuming a nonce is an atomic DELETE ... RETURNING, so two
- * concurrent replays cannot both win.
- */
+/** Single-use sign-in nonces. Consumed by DELETE ... RETURNING. */
 export const authNonces = pgTable('auth_nonces', {
   nonce: text('nonce').primaryKey(),
   address: text('address').notNull(),
   issuedAt: timestamp('issued_at', { withTimezone: true }).notNull(),
   expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
-})
-
-/**
- * How far the log sweep has scanned.
- *
- * Without this the sweep could only look at a fixed recent window, and any
- * outage longer than that window would silently drop payments. One row, keyed
- * by chain.
- */
-export const sweepState = pgTable('sweep_state', {
-  chain: text('chain').primaryKey(),
-  lastBlock: bigint('last_block', { mode: 'bigint' }).notNull(),
-  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull().defaultNow(),
 })

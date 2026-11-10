@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1788266195351,
-      "tag": "0000_wakeful_the_order",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1788267193238,
-      "tag": "0001_organic_jocasta",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1788378485191,
-      "tag": "0002_loud_marten_broadcloak",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1788705427877,
-      "tag": "0003_true_blue_blade",
+      "when": 1794322305651,
+      "tag": "0000_init",
       "breakpoints": true
     }
   ]

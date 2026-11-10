@@ -1,23 +1,37 @@
 import { NextResponse } from 'next/server'
-import { CircleError } from './circles'
+import { ZamuError } from './errors'
 import { getSessionAddress } from './session'
 
-/** Every circle route needs a verified address; none of them work anonymously. */
+/** Every member route needs a verified Nimiq address. */
 export async function requireAddress(): Promise<string> {
   const address = await getSessionAddress()
-  if (!address) throw new CircleError('Sign in first.', 401)
+  if (!address) throw new ZamuError('Sign in first.', 401, 'signin')
   return address
 }
 
-export function errorResponse(error: unknown): NextResponse {
-  if (error instanceof CircleError) {
-    return NextResponse.json({ error: error.message }, { status: error.status })
+export async function readBody<T>(request: Request): Promise<T> {
+  try {
+    return (await request.json()) as T
+  } catch {
+    throw new ZamuError('Expected a JSON body.')
   }
-  console.error('[zamu] unhandled route error:', error)
-  return NextResponse.json({ error: 'Something went wrong on our side.' }, { status: 500 })
 }
 
-/** BigInt has no JSON representation; send raw units as a string. */
-export function serialiseAmount(value: bigint): string {
-  return value.toString()
+export function errorResponse(error: unknown): NextResponse {
+  if (error instanceof ZamuError) {
+    return NextResponse.json({ error: error.message, code: error.code }, { status: error.status })
+  }
+  console.error('[zamu] unhandled route error:', error)
+  return NextResponse.json({ error: 'Something went wrong on our side. Try again.' }, { status: 500 })
+}
+
+/** Wrap a route handler so every error becomes a JSON reply with a next step. */
+export function route<A extends unknown[]>(fn: (...args: A) => Promise<Response>) {
+  return async (...args: A): Promise<Response> => {
+    try {
+      return await fn(...args)
+    } catch (error) {
+      return errorResponse(error)
+    }
+  }
 }

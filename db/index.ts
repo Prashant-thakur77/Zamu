@@ -1,28 +1,39 @@
-import { neon } from '@neondatabase/serverless'
-import { drizzle } from 'drizzle-orm/neon-http'
+import postgres from 'postgres'
+import { drizzle } from 'drizzle-orm/postgres-js'
 import * as schema from './schema'
 
 type Db = ReturnType<typeof drizzle<typeof schema>>
 
-let cached: Db | undefined
+const g = globalThis as unknown as { __zamuDb?: Db; __zamuSql?: ReturnType<typeof postgres> }
 
 /**
- * Resolved lazily so a missing DATABASE_URL fails at the first query with a
- * clear message, rather than at import time — which would break `next build`
- * on a machine that has no database configured yet.
+ * One connection per Lambda instance (max: 1), released when idle, so a burst
+ * of cold starts cannot exhaust a micro RDS instance. Resolved lazily so
+ * `next build` works without a database.
  */
 export function getDb(): Db {
-  if (cached) return cached
+  if (g.__zamuDb) return g.__zamuDb
 
   const url = process.env.DATABASE_URL
-  if (!url) {
-    throw new Error(
-      'DATABASE_URL is not set. Create a Neon project, then put the connection string in .env.local',
-    )
-  }
+  if (!url) throw new Error('DATABASE_URL is not set. Copy .env.example to .env.local and fill it in.')
 
-  cached = drizzle(neon(url), { schema })
-  return cached
+  const local = /@(localhost|127\.0\.0\.1)[:/]/.test(url)
+  const sql = postgres(url, {
+    max: Number(process.env.DB_POOL_MAX ?? 1),
+    idle_timeout: 20,
+    connect_timeout: 10,
+    ssl: local ? false : 'require',
+  })
+  g.__zamuSql = sql
+  g.__zamuDb = drizzle(sql, { schema })
+  return g.__zamuDb
+}
+
+/** Close the pool (scripts and tests). */
+export async function closeDb(): Promise<void> {
+  await g.__zamuSql?.end({ timeout: 5 })
+  g.__zamuSql = undefined
+  g.__zamuDb = undefined
 }
 
 export { schema }

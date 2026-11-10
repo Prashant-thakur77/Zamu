@@ -15,8 +15,8 @@ export const NIM = {
   explorer: 'https://nimiq.watch',
 } as const
 
-/** Confirmations before a NIM transfer counts as settled. Blocks are ~1s. */
-export const NIM_CONFIRMATIONS = 10
+/** Confirmations before a NIM transfer counts as settled. Albatross finalises fast. */
+export const NIM_CONFIRMATIONS = 2
 
 export function nimRpcUrl(): string {
   return process.env.NIMIQ_RPC_URL || DEFAULT_RPC
@@ -64,6 +64,9 @@ export interface NimTransaction {
   to: string
   /** Luna. */
   value: number
+  /** Hex-encoded payload; holds the memo for basic transactions with data. */
+  recipientData?: string
+  senderData?: string
   executionResult: boolean
 }
 
@@ -121,4 +124,37 @@ export function parseNim(value: string): bigint {
   if (!/^\d+(\.\d{0,5})?$/.test(trimmed)) throw new Error('Not a valid NIM amount.')
   const [whole, frac = ''] = trimmed.split('.')
   return BigInt(whole) * 100_000n + BigInt(frac.padEnd(5, '0'))
+}
+
+export async function getNimTransactionsByAddress(address: string, max = 50): Promise<NimTransaction[]> {
+  return nimRpc<NimTransaction[]>('getTransactionsByAddress', [address, max, null])
+}
+
+export interface NimStaker {
+  address: string
+  balance: number
+  delegation: string | null
+  inactiveBalance: number
+  inactiveFrom: number | null
+  retiredBalance: number
+}
+
+/** Null when the address has never staked. */
+export async function getNimStaker(address: string): Promise<NimStaker | null> {
+  try {
+    return await nimRpc<NimStaker>('getStakerByAddress', [address])
+  } catch (error) {
+    if (error instanceof NimRpcError && /No staker/i.test(error.message)) return null
+    throw error
+  }
+}
+
+export function hexToUtf8(hex: string | undefined): string {
+  if (!hex) return ''
+  try {
+    const bytes = new Uint8Array(hex.match(/../g)?.map((b) => parseInt(b, 16)) ?? [])
+    return new TextDecoder().decode(bytes)
+  } catch {
+    return ''
+  }
 }

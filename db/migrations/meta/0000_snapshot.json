@@ -1,11 +1,48 @@
 {
-  "id": "2768a103-f22a-49b6-b907-46e18e9946e6",
+  "id": "0178f54f-ed5b-4e10-b732-e9796e5c0c9e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.circles": {
-      "name": "circles",
+    "public.auth_nonces": {
+      "name": "auth_nonces",
+      "schema": "",
+      "columns": {
+        "nonce": {
+          "name": "nonce",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "issued_at": {
+          "name": "issued_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.chamas": {
+      "name": "chamas",
       "schema": "",
       "columns": {
         "id": {
@@ -21,17 +58,9 @@
           "primaryKey": false,
           "notNull": true
         },
-        "token": {
-          "name": "token",
-          "type": "token",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'USDT_POLYGON'"
-        },
-        "contribution_amount": {
-          "name": "contribution_amount",
-          "type": "bigint",
+        "share_kes": {
+          "name": "share_kes",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true
         },
@@ -50,7 +79,7 @@
         },
         "status": {
           "name": "status",
-          "type": "circle_status",
+          "type": "chama_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
@@ -68,6 +97,13 @@
           "primaryKey": false,
           "notNull": true
         },
+        "skip_until_paid_up": {
+          "name": "skip_until_paid_up",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": true
+        },
         "starts_at": {
           "name": "starts_at",
           "type": "timestamp with time zone",
@@ -76,6 +112,12 @@
         },
         "locked_at": {
           "name": "locked_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "activated_at": {
+          "name": "activated_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
@@ -89,8 +131,8 @@
         }
       },
       "indexes": {
-        "circles_invite_code_idx": {
-          "name": "circles_invite_code_idx",
+        "chamas_invite_code_idx": {
+          "name": "chamas_invite_code_idx",
           "columns": [
             {
               "expression": "invite_code",
@@ -106,9 +148,9 @@
         }
       },
       "foreignKeys": {
-        "circles_creator_address_users_address_fk": {
-          "name": "circles_creator_address_users_address_fk",
-          "tableFrom": "circles",
+        "chamas_creator_address_users_address_fk": {
+          "name": "chamas_creator_address_users_address_fk",
+          "tableFrom": "chamas",
           "tableTo": "users",
           "columnsFrom": [
             "creator_address"
@@ -126,8 +168,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.contributions": {
-      "name": "contributions",
+    "public.invoices": {
+      "name": "invoices",
       "schema": "",
       "columns": {
         "id": {
@@ -143,46 +185,162 @@
           "primaryKey": false,
           "notNull": true
         },
-        "from_address": {
-          "name": "from_address",
+        "member": {
+          "name": "member",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "to_address": {
-          "name": "to_address",
+        "method": {
+          "name": "method",
+          "type": "payout_method",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "recipient_address": {
+          "name": "recipient_address",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "amount": {
-          "name": "amount",
-          "type": "bigint",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "tx_hash": {
-          "name": "tx_hash",
+        "recipient_phone": {
+          "name": "recipient_phone",
           "type": "text",
           "primaryKey": false,
           "notNull": false
         },
-        "block_number": {
-          "name": "block_number",
+        "recipient_lightning": {
+          "name": "recipient_lightning",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "recipient_nim": {
+          "name": "recipient_nim",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kes": {
+          "name": "kes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sats": {
+          "name": "sats",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "msats": {
+          "name": "msats",
           "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "luna": {
+          "name": "luna",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "bolt11": {
+          "name": "bolt11",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "payment_hash": {
+          "name": "payment_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "receipt_url": {
+          "name": "receipt_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "verify_url": {
+          "name": "verify_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
         },
         "status": {
           "name": "status",
-          "type": "contribution_status",
+          "type": "invoice_status",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'pending'"
+          "default": "'issued'"
         },
-        "confirmed_at": {
-          "name": "confirmed_at",
+        "nimiq_hash": {
+          "name": "nimiq_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "swap_id": {
+          "name": "swap_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "receipt_code": {
+          "name": "receipt_code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kes_delivered": {
+          "name": "kes_delivered",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "failure_reason": {
+          "name": "failure_reason",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "recipient_confirmed_at": {
+          "name": "recipient_confirmed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tapped_at": {
+          "name": "tapped_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "submitted_at": {
+          "name": "submitted_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "delivered_at": {
+          "name": "delivered_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_checked_at": {
+          "name": "last_checked_at",
           "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false
@@ -196,8 +354,8 @@
         }
       },
       "indexes": {
-        "contributions_round_from_idx": {
-          "name": "contributions_round_from_idx",
+        "invoices_round_member_idx": {
+          "name": "invoices_round_member_idx",
           "columns": [
             {
               "expression": "round_id",
@@ -206,7 +364,7 @@
               "nulls": "last"
             },
             {
-              "expression": "from_address",
+              "expression": "member",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -217,11 +375,11 @@
           "method": "btree",
           "with": {}
         },
-        "contributions_tx_hash_idx": {
-          "name": "contributions_tx_hash_idx",
+        "invoices_payment_hash_idx": {
+          "name": "invoices_payment_hash_idx",
           "columns": [
             {
-              "expression": "tx_hash",
+              "expression": "payment_hash",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -231,12 +389,42 @@
           "concurrently": false,
           "method": "btree",
           "with": {}
+        },
+        "invoices_nimiq_hash_idx": {
+          "name": "invoices_nimiq_hash_idx",
+          "columns": [
+            {
+              "expression": "nimiq_hash",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "invoices_status_idx": {
+          "name": "invoices_status_idx",
+          "columns": [
+            {
+              "expression": "status",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
         }
       },
       "foreignKeys": {
-        "contributions_round_id_rounds_id_fk": {
-          "name": "contributions_round_id_rounds_id_fk",
-          "tableFrom": "contributions",
+        "invoices_round_id_rounds_id_fk": {
+          "name": "invoices_round_id_rounds_id_fk",
+          "tableFrom": "invoices",
           "tableTo": "rounds",
           "columnsFrom": [
             "round_id"
@@ -265,8 +453,8 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "circle_id": {
-          "name": "circle_id",
+        "chama_id": {
+          "name": "chama_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
@@ -277,19 +465,73 @@
           "primaryKey": false,
           "notNull": true
         },
+        "display_name": {
+          "name": "display_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
         "payout_position": {
           "name": "payout_position",
           "type": "integer",
           "primaryKey": false,
           "notNull": false
         },
-        "status": {
-          "name": "status",
-          "type": "member_status",
+        "payout_method": {
+          "name": "payout_method",
+          "type": "payout_method",
           "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
-          "default": "'active'"
+          "default": "'mpesa'"
+        },
+        "payout_phone": {
+          "name": "payout_phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "payout_lightning": {
+          "name": "payout_lightning",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "payout_nim": {
+          "name": "payout_nim",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "consent_at": {
+          "name": "consent_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "agreement_message": {
+          "name": "agreement_message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agreement_public_key": {
+          "name": "agreement_public_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agreement_signature": {
+          "name": "agreement_signature",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "agreement_signed_at": {
+          "name": "agreement_signed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
         },
         "joined_at": {
           "name": "joined_at",
@@ -300,11 +542,11 @@
         }
       },
       "indexes": {
-        "members_circle_address_idx": {
-          "name": "members_circle_address_idx",
+        "members_chama_address_idx": {
+          "name": "members_chama_address_idx",
           "columns": [
             {
-              "expression": "circle_id",
+              "expression": "chama_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -338,12 +580,12 @@
         }
       },
       "foreignKeys": {
-        "members_circle_id_circles_id_fk": {
-          "name": "members_circle_id_circles_id_fk",
+        "members_chama_id_chamas_id_fk": {
+          "name": "members_chama_id_chamas_id_fk",
           "tableFrom": "members",
-          "tableTo": "circles",
+          "tableTo": "chamas",
           "columnsFrom": [
-            "circle_id"
+            "chama_id"
           ],
           "columnsTo": [
             "id"
@@ -371,101 +613,6 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.reputation_events": {
-      "name": "reputation_events",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true,
-          "default": "gen_random_uuid()"
-        },
-        "address": {
-          "name": "address",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "circle_id": {
-          "name": "circle_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "round_id": {
-          "name": "round_id",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "kind": {
-          "name": "kind",
-          "type": "reputation_kind",
-          "typeSchema": "public",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp with time zone",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {
-        "reputation_address_idx": {
-          "name": "reputation_address_idx",
-          "columns": [
-            {
-              "expression": "address",
-              "isExpression": false,
-              "asc": true,
-              "nulls": "last"
-            }
-          ],
-          "isUnique": false,
-          "concurrently": false,
-          "method": "btree",
-          "with": {}
-        }
-      },
-      "foreignKeys": {
-        "reputation_events_circle_id_circles_id_fk": {
-          "name": "reputation_events_circle_id_circles_id_fk",
-          "tableFrom": "reputation_events",
-          "tableTo": "circles",
-          "columnsFrom": [
-            "circle_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "reputation_events_round_id_rounds_id_fk": {
-          "name": "reputation_events_round_id_rounds_id_fk",
-          "tableFrom": "reputation_events",
-          "tableTo": "rounds",
-          "columnsFrom": [
-            "round_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {},
-      "policies": {},
-      "checkConstraints": {},
-      "isRLSEnabled": false
-    },
     "public.rounds": {
       "name": "rounds",
       "schema": "",
@@ -477,8 +624,8 @@
           "notNull": true,
           "default": "gen_random_uuid()"
         },
-        "circle_id": {
-          "name": "circle_id",
+        "chama_id": {
+          "name": "chama_id",
           "type": "uuid",
           "primaryKey": false,
           "notNull": true
@@ -494,6 +641,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": true
+        },
+        "skipped_address": {
+          "name": "skipped_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "opens_at": {
           "name": "opens_at",
@@ -514,14 +667,32 @@
           "primaryKey": false,
           "notNull": true,
           "default": "'upcoming'"
+        },
+        "msats_per_kes": {
+          "name": "msats_per_kes",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "luna_per_kes": {
+          "name": "luna_per_kes",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "completed_at": {
+          "name": "completed_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {
-        "rounds_circle_index_idx": {
-          "name": "rounds_circle_index_idx",
+        "rounds_chama_index_idx": {
+          "name": "rounds_chama_index_idx",
           "columns": [
             {
-              "expression": "circle_id",
+              "expression": "chama_id",
               "isExpression": false,
               "asc": true,
               "nulls": "last"
@@ -540,12 +711,12 @@
         }
       },
       "foreignKeys": {
-        "rounds_circle_id_circles_id_fk": {
-          "name": "rounds_circle_id_circles_id_fk",
+        "rounds_chama_id_chamas_id_fk": {
+          "name": "rounds_chama_id_chamas_id_fk",
           "tableFrom": "rounds",
-          "tableTo": "circles",
+          "tableTo": "chamas",
           "columnsFrom": [
-            "circle_id"
+            "chama_id"
           ],
           "columnsTo": [
             "id"
@@ -554,6 +725,79 @@
           "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.stake_events": {
+      "name": "stake_events",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kind": {
+          "name": "kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "luna": {
+          "name": "luna",
+          "type": "bigint",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "validator": {
+          "name": "validator",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tx_hash": {
+          "name": "tx_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "stake_events_address_idx": {
+          "name": "stake_events_address_idx",
+          "columns": [
+            {
+              "expression": "address",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
@@ -569,12 +813,6 @@
           "type": "text",
           "primaryKey": true,
           "notNull": true
-        },
-        "nim_address": {
-          "name": "nim_address",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
         },
         "display_name": {
           "name": "display_name",
@@ -600,25 +838,15 @@
     }
   },
   "enums": {
-    "public.circle_status": {
-      "name": "circle_status",
+    "public.chama_status": {
+      "name": "chama_status",
       "schema": "public",
       "values": [
         "forming",
+        "signing",
         "active",
         "completed",
-        "broken"
-      ]
-    },
-    "public.contribution_status": {
-      "name": "contribution_status",
-      "schema": "public",
-      "values": [
-        "pending",
-        "confirmed",
-        "failed",
-        "late",
-        "missed"
+        "cancelled"
       ]
     },
     "public.frequency": {
@@ -631,22 +859,25 @@
         "monthly"
       ]
     },
-    "public.member_status": {
-      "name": "member_status",
+    "public.invoice_status": {
+      "name": "invoice_status",
       "schema": "public",
       "values": [
-        "active",
-        "defaulted",
-        "left"
+        "issued",
+        "submitted",
+        "checking",
+        "delivered",
+        "failed",
+        "expired"
       ]
     },
-    "public.reputation_kind": {
-      "name": "reputation_kind",
+    "public.payout_method": {
+      "name": "payout_method",
       "schema": "public",
       "values": [
-        "paid_on_time",
-        "paid_late",
-        "missed"
+        "mpesa",
+        "lightning",
+        "nim"
       ]
     },
     "public.round_status": {
@@ -655,16 +886,7 @@
       "values": [
         "upcoming",
         "open",
-        "settling",
         "complete"
-      ]
-    },
-    "public.token": {
-      "name": "token",
-      "schema": "public",
-      "values": [
-        "USDT_POLYGON",
-        "NIM"
       ]
     }
   },

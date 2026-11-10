@@ -4,5 +4,9 @@ import { getSessionAddress } from '@/lib/session'
 export const dynamic = 'force-dynamic'
 
 export async function GET() {
-  return NextResponse.json({ address: await getSessionAddress() })
+  try {
+    return NextResponse.json({ address: await getSessionAddress() })
+  } catch {
+    return NextResponse.json({ address: null })
+  }
 }

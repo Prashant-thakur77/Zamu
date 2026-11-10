@@ -1,23 +1,22 @@
 import { NextResponse } from 'next/server'
-import { randomBytes } from 'node:crypto'
+import { route } from '@/lib/api'
 import { buildAuthMessage } from '@/lib/auth-message'
+import { ZamuError } from '@/lib/errors'
+import { isValidNimAddress, normaliseAddress } from '@/lib/nimiq-sig'
 import { issueNonce } from '@/lib/session'
 
 export const dynamic = 'force-dynamic'
 
-/**
- * Hands the client the exact message to sign. The nonce is stored server-side
- * (in a signed, single-use cookie) so a signature cannot be replayed.
- */
-export async function GET(request: Request) {
-  const address = new URL(request.url).searchParams.get('address')?.toLowerCase()
-  if (!address || !/^0x[0-9a-f]{40}$/.test(address)) {
-    return NextResponse.json({ error: 'A valid address is required.' }, { status: 400 })
-  }
+const spaced = (a: string) => normaliseAddress(a).replace(/.{4}/g, '$& ').trim()
 
-  const nonce = randomBytes(16).toString('hex')
+export const GET = route(async (request: Request) => {
+  const raw = new URL(request.url).searchParams.get('address') ?? ''
+  if (!isValidNimAddress(raw)) throw new ZamuError('That is not a Nimiq address.')
+  const address = spaced(raw)
+  const bytes = new Uint8Array(16)
+  crypto.getRandomValues(bytes)
+  const nonce = Array.from(bytes, (b) => b.toString(16).padStart(2, '0')).join('')
   const issuedAt = new Date().toISOString()
   await issueNonce(nonce, address, issuedAt)
-
-  return NextResponse.json({ message: buildAuthMessage({ address, nonce, issuedAt }) })
-}
+  return NextResponse.json({ message: buildAuthMessage({ address, nonce, issuedAt }), address })
+})

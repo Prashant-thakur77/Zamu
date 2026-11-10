@@ -1,34 +1,60 @@
-import { shortAddress } from './format'
-
 /**
- * The message a member shares to chase down whoever hasn't paid.
- *
- * Zamu has no push channel to reach for — Nimiq Pay does not expose one to mini
- * apps — so the realistic path is the one these circles already run on: a
- * WhatsApp or SMS group. This builds the text; the native share sheet is what
- * actually sends it.
+ * Messages members send each other over WhatsApp or SMS. Nimiq Pay offers mini
+ * apps no push channel, so the group chat these chamas already run on is the
+ * channel; the native share sheet sends it.
  */
+
+export function miniAppLink(origin: string): string {
+  const host = origin.replace(/^https?:\/\//, '').replace(/\/$/, '')
+  return `https://nimpay.app/miniapps/open/${host}`
+}
+
+export function kes(amount: number): string {
+  return `KSh ${amount.toLocaleString('en-US')}`
+}
+
+export function buildInviteMessage(params: { chamaName: string; shareKes: number; frequency: string; code: string; link: string; lang?: 'en' | 'sw' }): string {
+  if (params.lang === 'sw') {
+    return [
+      `Jiunge na chama "${params.chamaName}" kwenye Zamu.`,
+      `Mchango: ${kes(params.shareKes)} ${params.frequency}. Zamu yako ikifika, pesa inaingia M-Pesa yako moja kwa moja.`,
+      '',
+      `Nambari ya mwaliko: ${params.code}`,
+      `Fungua kwenye Nimiq Pay: ${params.link}`,
+    ].join('\n')
+  }
+  return [
+    `Join our chama "${params.chamaName}" on Zamu.`,
+    `Share: ${kes(params.shareKes)} ${params.frequency}. When it's your turn, everyone's share lands straight in your M-Pesa.`,
+    '',
+    `Invite code: ${params.code}`,
+    `Open in Nimiq Pay: ${params.link}`,
+  ].join('\n')
+}
+
 export function buildNudgeMessage(params: {
-  circleName: string
-  amount: string
-  recipientAddress: string
+  chamaName: string
+  shareKes: number
+  recipientName: string
   dueAt: string
   outstanding: string[]
   url: string
+  lang?: 'en' | 'sw'
 }): string {
-  const { circleName, amount, recipientAddress, dueAt, outstanding, url } = params
-
-  const due = new Date(dueAt)
-  const dueLabel = due.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-
-  const who =
-    outstanding.length === 1
-      ? shortAddress(outstanding[0])
-      : `${outstanding.length} people`
-
+  const { chamaName, shareKes, recipientName, dueAt, outstanding, url } = params
+  const dueLabel = new Date(dueAt).toLocaleDateString('en-GB', { month: 'short', day: 'numeric' })
+  const who = outstanding.length === 1 ? outstanding[0] : `${outstanding.length} people`
+  if (params.lang === 'sw') {
+    return [
+      `${chamaName}: ${who} bado ${outstanding.length === 1 ? 'hajalipa' : 'hawajalipa'} ${kes(shareKes)}`,
+      `kwa ${recipientName}, mwisho ${dueLabel}.`,
+      '',
+      `Lipa hapa: ${url}`,
+    ].join('\n')
+  }
   return [
-    `${circleName}: ${who} still ${outstanding.length === 1 ? 'owes' : 'owe'} ${amount}`,
-    `to ${shortAddress(recipientAddress)}, due ${dueLabel}.`,
+    `${chamaName}: ${who} still ${outstanding.length === 1 ? 'owes' : 'owe'} ${kes(shareKes)}`,
+    `to ${recipientName}, due ${dueLabel}.`,
     '',
     `Pay here: ${url}`,
   ].join('\n')
@@ -39,25 +65,16 @@ export interface ShareResult {
   method: 'share' | 'clipboard' | 'none'
 }
 
-/**
- * Send the nudge however this device can. The Web Share API opens the native
- * sheet on a phone; a desktop browser inside Nimiq Pay's dev tools has neither,
- * so this falls back to the clipboard rather than doing nothing.
- */
-export async function shareNudge(text: string): Promise<ShareResult> {
+/** Native share sheet on a phone, clipboard otherwise. */
+export async function shareText(text: string): Promise<ShareResult> {
   if (typeof navigator !== 'undefined' && typeof navigator.share === 'function') {
     try {
       await navigator.share({ text })
       return { ok: true, method: 'share' }
     } catch (error) {
-      // AbortError means the person closed the sheet — not a failure to report.
-      if (error instanceof Error && error.name === 'AbortError') {
-        return { ok: false, method: 'share' }
-      }
-      // Fall through to the clipboard if sharing itself is broken.
+      if (error instanceof Error && error.name === 'AbortError') return { ok: false, method: 'share' }
     }
   }
-
   if (typeof navigator !== 'undefined' && navigator.clipboard?.writeText) {
     try {
       await navigator.clipboard.writeText(text)
@@ -66,6 +83,5 @@ export async function shareNudge(text: string): Promise<ShareResult> {
       // fall through
     }
   }
-
   return { ok: false, method: 'none' }
 }

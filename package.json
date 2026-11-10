@@ -14,31 +14,43 @@
   },
   "scripts": {
     "dev": "next dev",
+    "dev:lan": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
-    "dev:lan": "next dev -H 0.0.0.0",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "tsx --test test/unit/*.test.ts",
+    "test:integration": "node --env-file-if-exists=.env.local ./node_modules/.bin/tsx --test --test-concurrency=1 test/integration/*.test.ts",
+    "test:e2e": "playwright test",
     "db:generate": "drizzle-kit generate",
-    "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio"
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "proof": "tsx scripts/proof.ts"
   },
   "dependencies": {
-    "@neondatabase/serverless": "^1.1.0",
-    "@nimiq/mini-app-sdk": "^0.1.0",
+    "@nimiq/mini-app-sdk": "^0.2.5",
+    "@noble/curves": "^2.4.0",
+    "@noble/hashes": "^2.4.0",
     "drizzle-orm": "^0.45.2",
     "jose": "^6.2.10",
+    "light-bolt11-decoder": "^3.2.0",
     "lucide-react": "^1.39.0",
     "next": "16.3.3",
+    "postgres": "^4.1.0",
     "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "viem": "^2.55.19"
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
+    "@nimiq/core": "^2.23.0",
+    "@playwright/test": "^1.65.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "bolt11": "^1.4.2",
     "drizzle-kit": "^0.31.10",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

@@ -1,17 +1,12 @@
 /**
- * The exact text the member signs. Shared by the client (which asks the wallet
- * to sign it) and the server (which reconstructs it to verify) — if these ever
- * drift, every login fails, so they must come from one place.
+ * The sign-in text. Shared by client and server so the server can rebuild it
+ * exactly; the nonce inside is server-issued and single-use.
  */
-export function buildAuthMessage(params: {
-  address: string
-  nonce: string
-  issuedAt: string
-}): string {
+export function buildAuthMessage(params: { address: string; nonce: string; issuedAt: string }): string {
   return [
-    'Zamu — verify your wallet',
+    'Sign in to Zamu',
     '',
-    'Signing this proves you own this address. It is free and sends no funds.',
+    'This proves you own this Nimiq address. It is free and sends no money.',
     '',
     `Address: ${params.address}`,
     `Nonce: ${params.nonce}`,
