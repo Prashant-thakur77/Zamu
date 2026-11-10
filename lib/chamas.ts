@@ -430,3 +430,25 @@ export async function listChamasFor(address: string) {
     c.youOwe ? 0 : c.openRound?.yourTurn ? 1 : c.status === 'active' ? 2 : c.status === 'signing' ? 3 : c.status === 'forming' ? 4 : 5
   return list.sort((a, b) => rank(a) - rank(b) || b.createdAt.getTime() - a.createdAt.getTime())
 }
+
+/** A member's signed agreement, for any member of the same chama to read and check. */
+export async function signedAgreement(chamaId: string, viewer: string, address: string) {
+  const members = await loadMembers(chamaId)
+  if (!members.some((m) => m.address === viewer)) throw new ZamuError('You are not a member of this chama.', 403)
+  const m = members.find((x) => x.address === address)
+  if (!m?.agreementSignedAt) throw new ZamuError('Not signed yet.', 404)
+  return {
+    name: m.displayName,
+    address: m.address,
+    message: m.agreementMessage,
+    publicKey: m.agreementPublicKey,
+    signature: m.agreementSignature,
+    signedAt: m.agreementSignedAt,
+    valid: verifyNimiqMessage({
+      message: m.agreementMessage ?? '',
+      publicKey: m.agreementPublicKey ?? '',
+      signature: m.agreementSignature ?? '',
+      expectedAddress: m.address,
+    }),
+  }
+}
