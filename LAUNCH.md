@@ -37,4 +37,5 @@ Feedback very welcome, especially from anyone who's in a chama.
 ## Published
 
 - X: https://x.com/2730Thakur12618/status/2120233985637060966
+- Skool: https://www.skool.com/miniappscompetition/zamu-a-chama-that-pays-straight-to-m-pesa-save?p=8f616483
 - Video: https://youtu.be/l7_HeIk76Ig
