@@ -1,7 +1,7 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { Suspense, useState } from 'react'
 import { useApp } from '@/components/app-provider'
 import { emptyPayout, PayoutPicker, toPayoutInput, type PayoutState } from '@/components/payout-picker'
 import { SignInGate } from '@/components/signin-gate'
@@ -11,12 +11,22 @@ import { api, ApiError } from '@/lib/client/api'
 const FREQS = ['daily', 'weekly', 'biweekly', 'monthly'] as const
 
 export default function StartPage() {
+  return (
+    <Suspense>
+      <StartInner />
+    </Suspense>
+  )
+}
+
+function StartInner() {
   const { t } = useApp()
   const router = useRouter()
+  const q = useSearchParams()
+  const qFreq = q.get('freq') as (typeof FREQS)[number] | null
   const [name, setName] = useState('')
-  const [share, setShare] = useState('1000')
-  const [freq, setFreq] = useState<(typeof FREQS)[number]>('weekly')
-  const [size, setSize] = useState(6)
+  const [share, setShare] = useState(q.get('share')?.replace(/[^\d]/g, '').slice(0, 5) || '1000')
+  const [freq, setFreq] = useState<(typeof FREQS)[number]>(qFreq && FREQS.includes(qFreq) ? qFreq : 'weekly')
+  const [size, setSize] = useState(Math.min(30, Math.max(2, Number(q.get('size')) || 6)))
   const [rule, setRule] = useState(true)
   const [you, setYou] = useState('')
   const [payout, setPayout] = useState<PayoutState>(emptyPayout)

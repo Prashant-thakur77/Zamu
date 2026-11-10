@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Archivo, Instrument_Sans, JetBrains_Mono } from 'next/font/google'
 import { AppProvider } from '@/components/app-provider'
+import { TabBar, TabSpacer } from '@/components/tab-bar'
 import { BOOT_SCRIPT, DEV_ERROR_SCRIPT } from './boot-script'
 import './globals.css'
 
@@ -47,7 +48,11 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       </head>
       <body className="relative min-h-full">
         <AppProvider>
-          <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-[480px] flex-col">{children}</div>
+          <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-[480px] flex-col">
+            {children}
+            <TabSpacer />
+            <TabBar />
+          </div>
         </AppProvider>
       </body>
     </html>

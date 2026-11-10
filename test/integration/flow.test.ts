@@ -313,3 +313,34 @@ test('NIM payout: amount from the round rate, memo binds the transaction', async
     server.close()
   }
 })
+
+test('my record sums paid and received, and leaving follows the rules', async () => {
+  const { summaryFor, leaveChama, reliability } = await import('../../lib/me')
+  const { chama, people } = await setup(['0712900001', '0712900002', '0712900003'])
+  // Leaving: the creator cannot, a member can while forming.
+  await assert.rejects(leaveChama(chama.id, people[0].address), /cancel it instead/)
+  await leaveChama(chama.id, people[2].address)
+  await assert.rejects(leaveChama(chama.id, people[2].address), /not a member/)
+  await lockChama({ chamaId: chama.id, caller: people[0].address })
+  await assert.rejects(leaveChama(chama.id, people[1].address), /no longer leave/)
+  for (const p of people.slice(0, 2)) await sign(chama.id, p)
+  const view = await getChamaForMember(chama.id, people[0].address)
+  const inv = await issueInvoice(view.rounds[0].id, people[1].address)
+
+  let s = await summaryFor(people[1].address)
+  assert.equal(s.owe.length, 1)
+  assert.equal(s.owe[0].kes, 100)
+  assert.equal(s.owe[0].to, 'Wanjiru')
+
+  await markSubmitted({ id: inv.id, member: people[1].address, hash: '7'.repeat(64) })
+  await backdate(inv.id, 10)
+  await invoiceStatus(inv.id, people[1].address)
+
+  s = await summaryFor(people[1].address)
+  assert.equal(s.paidKes, 100)
+  assert.equal(s.owe.length, 0)
+  assert.equal(reliability(s.record), 100)
+  const r = await summaryFor(people[0].address)
+  assert.equal(r.receivedKes, 100)
+  assert.equal(r.past.length, 1, 'a 2-member round closes on one delivered share')
+})

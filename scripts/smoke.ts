@@ -50,7 +50,7 @@ function client() {
 async function main() {
   const h = await fetch(`${base}/api/health`).then((r) => r.json())
   check('health: database and secrets', h.ok === true, JSON.stringify(h.checks))
-  for (const p of ['/', '/demo', '/start', '/join', '/reserve', '/icon.svg', '/opengraph-image']) {
+  for (const p of ['/', '/demo', '/start', '/join', '/reserve', '/chamas', '/me', '/help', '/icon.svg', '/opengraph-image']) {
     const r = await fetch(base + p)
     check(`GET ${p}`, r.status === 200, String(r.status))
   }
@@ -73,8 +73,8 @@ async function main() {
   check('invalid signature refused', garbage.status === 401, String(garbage.status))
   void n2
 
-  const me = await a.call('/api/auth/me')
-  check('session cookie works', me.body.address === a.address)
+  const meA = await a.call('/api/auth/me')
+  check('session cookie works', meA.body.address === a.address)
 
   const created = await a.call('/api/chamas', {
     json: { name: 'Smoke test', shareKes: 20, frequency: 'daily', size: 2, skipUntilPaidUp: true, displayName: 'Wanjiru', payout: { method: 'mpesa', phone: '0712345678' }, consent: true },
@@ -107,6 +107,11 @@ async function main() {
   check('status reads as not yet paid', st.status === 200 && st.body.status === 'issued', st.body.status)
   const mine = await a.call(`/api/rounds/${board.body.rounds[0].id}/invoice`, { method: 'POST' })
   check('recipient cannot pay their own turn', mine.status === 409)
+
+  const me = await b.call('/api/me')
+  check('my record lists the share I owe', me.status === 200 && me.body.owe.length >= 1 && me.body.owe[0].kes === 20, JSON.stringify(me.body.owe?.[0] ?? me.body))
+  const leaveFixed = await b.call(`/api/chamas/${created.body.id}/leave`, { method: 'POST' })
+  check('cannot leave once the order is fixed', leaveFixed.status === 409)
 
   const cronNo = await fetch(`${base}/api/cron/tick`, { method: 'POST' })
   check('cron route refuses without the secret', cronNo.status === 401)

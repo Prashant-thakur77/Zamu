@@ -44,6 +44,7 @@ export function chamaView(params: { chama: Chama; members: Member[]; rounds: Rou
       record: onTimeRecord(m.address, rounds, invoices, now),
       isYou: self,
       isCreator: m.address === chama.creatorAddress,
+      joinedAt: m.joinedAt,
     }
   })
 

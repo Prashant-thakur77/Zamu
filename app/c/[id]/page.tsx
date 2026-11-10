@@ -4,6 +4,8 @@ import { use, useCallback, useEffect, useState } from 'react'
 import { useApp } from '@/components/app-provider'
 import { Ledger, MemberRecords, RoundCard } from '@/components/board'
 import { PaySheet, type PayTarget } from '@/components/pay-sheet'
+import { Activity, MyMembership, Receipts, Tabs, type TabId } from '@/components/chama-tabs'
+import { InviteExtras } from '@/components/invite-qr'
 import { SignInGate } from '@/components/signin-gate'
 import { Avatar, Button, KangaBand, Kes, Notice, Spinner, TopBar } from '@/components/ui'
 import { api } from '@/lib/client/api'
@@ -29,6 +31,7 @@ function Board({ id }: { id: string }) {
   const [chama, setChama] = useState<ChamaView | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [payFor, setPayFor] = useState<PayTarget | null>(null)
+  const [tab, setTab] = useState<TabId>('round')
 
   const load = useCallback(async () => {
     try {
@@ -78,9 +81,23 @@ function Board({ id }: { id: string }) {
           <span className="font-mono text-[13px] tracking-widest">{chama.inviteCode}</span>
         </p>
         {chama.skipUntilPaidUp && <p className="mt-1 text-[12.5px] text-ink-3">{t('form.rule')}</p>}
+        {chama.status !== 'forming' && (
+          <button type="button" onClick={() => setTab('members')} data-testid="signed-header"
+            className={`mt-2 inline-flex items-center gap-1.5 rounded-full border-[1.5px] px-3 py-1 text-[13px] font-bold ${chama.signedCount === chama.members.length ? 'border-leaf bg-leaf-bg text-leaf' : 'border-ink text-ink'}`}>
+            {chama.signedCount === chama.members.length ? '✓ ' : ''}{t('board.signed', { n: chama.signedCount, total: chama.members.length })}
+          </button>
+        )}
       </header>
 
-      {chama.status === 'forming' && <Forming chama={chama} onChange={load} />}
+      {chama.status === 'forming' && (
+        <>
+          <Forming chama={chama} onChange={load} />
+          <MyMembership chama={chama} onChange={load} />
+        </>
+      )}
+      {chama.status !== 'forming' && <Tabs value={tab} onChange={setTab} show={['round', 'receipts', 'members', 'activity']} />}
+      {chama.status !== 'forming' && tab === 'round' && (
+        <>
       {chama.status === 'signing' && <Signing chama={chama} onChange={load} />}
       {chama.status === 'cancelled' && (
         <div className="px-4">
@@ -109,8 +126,12 @@ function Board({ id }: { id: string }) {
         </div>
       )}
 
-      <Ledger chama={chama} />
-      {chama.status !== 'forming' && <MemberRecords chama={chama} />}
+          <Ledger chama={chama} />
+        </>
+      )}
+      {tab === 'receipts' && chama.status !== 'forming' && <Receipts chama={chama} />}
+      {tab === 'members' && chama.status !== 'forming' && <MemberRecords chama={chama} />}
+      {tab === 'activity' && chama.status !== 'forming' && <Activity chama={chama} />}
 
       {payFor && <PaySheet key={payFor.roundId} open onClose={() => setPayFor(null)} target={payFor} existing={mine} onChanged={load} />}
       <KangaBand />
@@ -172,6 +193,7 @@ function Forming({ chama, onChange }: { chama: ChamaView; onChange: () => void }
             {t('board.share')}
           </Button>
           {msg && <p className="mt-2 text-center text-[13px]">{msg}</p>}
+          <InviteExtras code={chama.inviteCode} />
         </div>
       </section>
 

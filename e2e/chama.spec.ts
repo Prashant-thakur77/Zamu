@@ -30,6 +30,7 @@ test('create, invite, join with consent, sign, pay to M-Pesa, round closes', asy
   await c.getByRole('button', { name: 'Close' }).click()
   await c.reload()
   await expect(c.getByText(/Everyone paid|Round 2/).first()).toBeVisible()
+  await c.getByTestId('tab-members').click()
   await expect(c.getByText('1 on time · 0 late').first()).toBeVisible()
 })
 
