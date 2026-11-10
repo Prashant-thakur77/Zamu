@@ -48,7 +48,9 @@ What was tested, how, and the result. Real-money payouts are the one thing not d
 | Database migrations applied (from inside AWS, `zamu-<stage>-migrate`) | pass |
 | Validator list and default (`Garuda Pool`) | pass |
 
-Total: 30/30.
+Total: 30/30 on dev, and 30/30 on production at https://zamu.prashantthakur.dev (TLS certificate issued by Amazon, valid to May 2027).
+
+Also on production: the Playwright screen tests (first screen, Swahili, demo chama payment, no sideways scroll at 360 px) pass, 4/4; outside Nimiq Pay the app shows "Open Zamu inside Nimiq Pay" and offers no mock sign-in; no console errors.
 
 ## Bugs found by testing and fixed
 
