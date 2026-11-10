@@ -4,9 +4,12 @@
  * channel; the native share sheet sends it.
  */
 
+/**
+ * Where to open Zamu. Unlisted Mini Apps open from Nimiq Pay's Custom URL field
+ * (Mini Apps → Custom URL), so messages carry the plain host to type there.
+ */
 export function miniAppLink(origin: string): string {
-  const host = origin.replace(/^https?:\/\//, '').replace(/\/$/, '')
-  return `https://nimpay.app/miniapps/open/${host}`
+  return origin.replace(/^https?:\/\//, '').replace(/\/$/, '')
 }
 
 export function kes(amount: number): string {
@@ -20,7 +23,7 @@ export function buildInviteMessage(params: { chamaName: string; shareKes: number
       `Mchango: ${kes(params.shareKes)} ${params.frequency}. Zamu yako ikifika, pesa inaingia M-Pesa yako moja kwa moja.`,
       '',
       `Nambari ya mwaliko: ${params.code}`,
-      `Fungua kwenye Nimiq Pay: ${params.link}`,
+      `Fungua Nimiq Pay → Mini Apps → Custom URL → ${params.link}, kisha "Jiunge kwa nambari".`,
     ].join('\n')
   }
   return [
@@ -28,7 +31,7 @@ export function buildInviteMessage(params: { chamaName: string; shareKes: number
     `Share: ${kes(params.shareKes)} ${params.frequency}. When it's your turn, everyone's share lands straight in your M-Pesa.`,
     '',
     `Invite code: ${params.code}`,
-    `Open in Nimiq Pay: ${params.link}`,
+    `Open Nimiq Pay → Mini Apps → Custom URL → ${params.link}, then "Join with a code".`,
   ].join('\n')
 }
 
@@ -49,14 +52,14 @@ export function buildNudgeMessage(params: {
       `${chamaName}: ${who} bado ${outstanding.length === 1 ? 'hajalipa' : 'hawajalipa'} ${kes(shareKes)}`,
       `kwa ${recipientName}, mwisho ${dueLabel}.`,
       '',
-      `Lipa hapa: ${url}`,
+      `Lipa ndani ya Nimiq Pay → Mini Apps → ${url}`,
     ].join('\n')
   }
   return [
     `${chamaName}: ${who} still ${outstanding.length === 1 ? 'owes' : 'owe'} ${kes(shareKes)}`,
     `to ${recipientName}, due ${dueLabel}.`,
     '',
-    `Pay here: ${url}`,
+    `Pay in Nimiq Pay → Mini Apps → ${url}`,
   ].join('\n')
 }
 

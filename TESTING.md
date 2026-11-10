@@ -77,7 +77,7 @@ Goal: 1–3 real mainnet payouts of KSh 15–50 to a tester's Safaricom number, 
 
 You need two phones with Nimiq Pay on **mainnet** (Settings → network), each with a little NIM (KSh 50 is about 1,500 NIM; keep 3,000 for fees and the swap), and one Safaricom number that will receive.
 
-1. Phone A (the recipient): open `https://nimpay.app/miniapps/open/zamu.prashantthakur.dev`, sign in, **Start a chama**: name "Proof 1", share KSh 20, every day, 2 members, payout M-Pesa with the tester's number, tick consent, create.
+1. Phone A (the recipient): open `Nimiq Pay → Mini Apps → Custom URL → zamu.prashantthakur.dev`, sign in, **Start a chama**: name "Proof 1", share KSh 20, every day, 2 members, payout M-Pesa with the tester's number, tick consent, create.
 2. Phone B: **Join with a code** using the code from A, any payout method, tick consent, join.
 3. Phone A: **Fix the order** (A first). Both phones: **Sign with Nimiq Pay**. Round 1 opens with A receiving.
 4. Phone B: **Pay KSh 20**. Nimiq Pay asks to allow invoice lookup, choose NIM, and approve the swap. Approve. The sheet shows "Sent. Waiting for M-Pesa…".

@@ -186,7 +186,7 @@ export const dict = {
     'common.home': 'Home',
 
     'desk.scan': 'Open it in Nimiq Pay',
-    'desk.scanSub': 'Zamu is a Nimiq Pay Mini App. Scan with your phone camera to open it inside the wallet.',
+    'desk.scanSub': 'Zamu is a Nimiq Pay Mini App. In Nimiq Pay, open Mini Apps and type this address in the Custom URL field. The QR code opens it on your phone too.',
     'nav.home': 'Home',
     'nav.chamas': 'Chamas',
     'nav.me': 'Me',
@@ -466,7 +466,7 @@ export const dict = {
     'common.home': 'Nyumbani',
 
     'desk.scan': 'Ifungue ndani ya Nimiq Pay',
-    'desk.scanSub': 'Zamu ni Mini App ya Nimiq Pay. Skani kwa kamera ya simu kuifungua ndani ya pochi.',
+    'desk.scanSub': 'Zamu ni Mini App ya Nimiq Pay. Ndani ya Nimiq Pay, fungua Mini Apps na uandike anwani hii kwenye sehemu ya Custom URL. Msimbo wa QR unaifungua kwenye simu pia.',
     'nav.home': 'Nyumbani',
     'nav.chamas': 'Vyama',
     'nav.me': 'Mimi',

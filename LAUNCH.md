@@ -8,7 +8,7 @@ Zamu runs in Nimiq Pay: members tap Pay, NIM or USDT goes over Lightning, and th
 
 My Nimiq Mini Apps Competition entry (Save).
 
-https://nimpay.app/miniapps/open/zamu.prashantthakur.dev
+Nimiq Pay → Mini Apps → Custom URL → zamu.prashantthakur.dev
 
 ## Skool
 
@@ -28,7 +28,7 @@ Other bits:
 - English and Swahili
 - a demo chama for anyone outside Kenya, no money involved
 
-Open it in Nimiq Pay: https://nimpay.app/miniapps/open/zamu.prashantthakur.dev
+Open it in Nimiq Pay: Mini Apps → Custom URL → zamu.prashantthakur.dev
 Code (MIT): https://github.com/Prashant-thakur77/Zamu
 
 Feedback very welcome, especially from anyone who's in a chama.

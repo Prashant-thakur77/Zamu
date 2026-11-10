@@ -2,7 +2,7 @@
 
 A chama where, when it's your turn, everyone's share lands straight in your M-Pesa in exact shillings, and the whole group sees every M-Pesa receipt.
 
-Live inside Nimiq Pay: open **Mini Apps → Custom URL** and enter `https://zamu.prashantthakur.dev`, or use [nimpay.app/miniapps/open/zamu.prashantthakur.dev](https://nimpay.app/miniapps/open/zamu.prashantthakur.dev).
+Live inside Nimiq Pay: open **Mini Apps → Custom URL** and enter `https://zamu.prashantthakur.dev`.
 
 <p>
   <img src="docs/screens/home.png" width="240" alt="First screen: Your chama, paid straight to M-Pesa, with the rotation ring" />

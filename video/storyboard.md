@@ -26,7 +26,7 @@ Until finally (the receipt lands, the turn passes) And ever since (Friday again,
 | S14 | Honest limit | Real payouts are next, and every number will come from our proof script. | PROOF.md placeholder, scripts/proof.ts code | code type-on | "proof script" | | repo |
 | S15 | Recap | Shares land in M-Pesa, not a group wallet. Paid means a receipt, not "sent". Everyone signs with Nimiq. Fall behind, lose your turn. No treasurer holds the pot. | kinetic lines, one per hit, on paper with kanga hem | riser into line 1 | each line's key word | lift | all shown above |
 | S16 | Close | Friday again. Wanjiru's phone buzzes: five thousand shillings, and a receipt for every share. | ring turns to the next seat; a phone with the SMS stack; callback to S1 b-roll | TurnWipe in reverse | "a receipt for every share" | swell, resolve | demo chama |
-| S17 | End card | Zamu. Open it in Nimiq Pay. | wordmark, zamu.prashantthakur.dev, nimpay.app link, GitHub | breathes | | chime | |
+| S17 | End card | Zamu. Open it in Nimiq Pay. | wordmark, zamu.prashantthakur.dev, Nimiq Pay → Mini Apps → Custom URL, GitHub | breathes | | chime | |
 
 Labels on screen: "persona" on Wanjiru; "local test · mock wallet and payout partner" on S5–S10 takes;
 "illustration" on S8; "live quote, not paid" on S13; "demo chama, no money" on the close phone.

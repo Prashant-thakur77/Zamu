@@ -130,10 +130,10 @@ test('agreement text carries the order and only a hash of the payout', () => {
 
 test('invite and nudge messages are WhatsApp friendly', () => {
   const link = miniAppLink('https://zamu.prashantthakur.dev/')
-  assert.equal(link, 'https://nimpay.app/miniapps/open/zamu.prashantthakur.dev')
+  assert.equal(link, 'zamu.prashantthakur.dev')
   const msg = buildInviteMessage({ chamaName: 'Mama Mboga', shareKes: 1000, frequency: 'every week', code: 'ABC234', link })
   assert.match(msg, /ABC234/)
-  assert.match(msg, /nimpay\.app/)
+  assert.match(msg, /Custom URL → zamu\.prashantthakur\.dev/)
   const nudge = buildNudgeMessage({ chamaName: 'X', shareKes: 500, recipientName: 'Wanjiru', dueAt: t0.toISOString(), outstanding: ['Otieno'], url: link })
   assert.match(nudge, /Otieno still owes KSh 500/)
 })

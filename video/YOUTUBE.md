@@ -8,7 +8,7 @@
 
 When it's your turn in your chama, everyone's share lands straight in your M-Pesa, in exact shillings, and the whole group sees every receipt. Zamu runs inside Nimiq Pay: members pay with NIM or USDT, Nimiq Pay swaps it to Bitcoin Lightning with payLightningInvoice, and a payout partner delivers M-Pesa. No treasurer holds the pot.
 
-Open it in Nimiq Pay: https://nimpay.app/miniapps/open/zamu.prashantthakur.dev
+Open it in Nimiq Pay: Mini Apps → Custom URL → zamu.prashantthakur.dev
 Live site: https://zamu.prashantthakur.dev
 Code (MIT): https://github.com/Prashant-thakur77/Zamu
 

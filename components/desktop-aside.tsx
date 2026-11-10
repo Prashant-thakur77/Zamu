@@ -6,7 +6,7 @@ import { useApp } from './app-provider'
 import Link from 'next/link'
 import { Mark } from './ui'
 
-const OPEN_URL = 'https://nimpay.app/miniapps/open/zamu.prashantthakur.dev'
+const OPEN_URL = 'https://zamu.prashantthakur.dev'
 
 /** Desktop only: what Zamu is, and how to open it where it lives, in Nimiq Pay on a phone. */
 export function DesktopAside() {
@@ -36,7 +36,7 @@ export function DesktopAside() {
         <div>
           <p className="text-[17px] font-bold text-ink">{t('desk.scan')}</p>
           <p className="mt-1 text-[14px] leading-snug text-ink-2">{t('desk.scanSub')}</p>
-          <p className="mt-2 font-mono text-[12px] break-all text-ink-3">{OPEN_URL.replace('https://', '')}</p>
+          <p className="mt-2 font-mono text-[13px] font-semibold break-all text-ink">Mini Apps → Custom URL → {OPEN_URL.replace('https://', '')}</p>
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-3">
