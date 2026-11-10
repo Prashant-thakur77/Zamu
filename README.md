@@ -68,7 +68,7 @@ With the two mock flags, a desktop browser gets a mock wallet that makes real Ni
 
 Tests: `npm run test:unit`, `npm run test:integration` (needs the database), `npm run test:e2e` (Playwright at 360×780). See [TESTING.md](TESTING.md).
 
-Deploy to AWS (ap-south-1): `./infra/build-web.sh && npx sst deploy --stage production`. That is the Next.js standalone server on Lambda behind API Gateway, RDS PostgreSQL with SSL forced, and a 5-minute scheduled job that opens due rounds and re-checks payouts. Set `AuthSecret` and `CronSecret` with `npx sst secret set` first, then run `npm run db:migrate` against the new database.
+Deploy to AWS (ap-south-1): `./infra/build-web.sh && npx sst deploy --stage production`. That is the Next.js standalone server on Lambda behind API Gateway, RDS PostgreSQL with SSL forced, and a 5-minute scheduled job that opens due rounds and re-checks payouts. Set `AuthSecret` and `CronSecret` with `npx sst secret set` first, then apply migrations from inside AWS with `aws lambda invoke --function-name zamu-production-migrate /dev/stdout`.
 
 ## License
 

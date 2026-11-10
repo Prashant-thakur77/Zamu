@@ -99,7 +99,7 @@ export default $config({
       runtime: 'nodejs22.x',
       architectures: ['arm64'],
       handler: 'run.sh',
-      code: new $util.asset.FileArchive('.lambda/web'),
+      code: new $util.asset.FileArchive(`${$cli.paths.root}/.lambda/web`),
       memorySize: 1024,
       timeout: 25,
       layers: ['arn:aws:lambda:ap-south-1:753240598075:layer:LambdaAdapterLayerArm64:25'],
@@ -120,6 +120,15 @@ export default $config({
     api.route('$default', webFn.arn)
 
     const web = { url: domainName ? $interpolate`https://${domainName}` : api.url }
+
+    new sst.aws.Function('Migrate', {
+      name: `zamu-${$app.stage}-migrate`,
+      handler: 'infra/migrate.handler',
+      environment,
+      copyFiles: [{ from: 'db/migrations', to: 'migrations' }],
+      timeout: '2 minutes',
+      architecture: 'arm64',
+    })
 
     new sst.aws.Cron('Tick', {
       schedule: 'rate(5 minutes)',

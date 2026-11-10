@@ -55,3 +55,4 @@ test-results/
 .open-next/
 infra/env.sh
 .lambda/
+sst-env.d.ts

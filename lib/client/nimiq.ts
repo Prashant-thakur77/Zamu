@@ -33,8 +33,10 @@ declare global {
 
 let cached: Promise<Wallet | null> | null = null
 
+/** Only ever on a local machine: localhost or a private LAN address. */
 export function mockEnabled(): boolean {
-  return process.env.NEXT_PUBLIC_MOCK_NIMIQ === '1'
+  if (process.env.NEXT_PUBLIC_MOCK_NIMIQ !== '1' || typeof window === 'undefined') return false
+  return /^(localhost|127\.0\.0\.1|10\.\d+\.\d+\.\d+|192\.168\.\d+\.\d+|172\.(1[6-9]|2\d|3[01])\.\d+\.\d+)$/.test(window.location.hostname)
 }
 
 export function insideNimiqPay(): boolean {

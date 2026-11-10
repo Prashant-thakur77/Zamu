@@ -6,7 +6,12 @@
  * through without moving money. It can never switch on in production.
  */
 export function isMockPayouts(): boolean {
-  return process.env.MOCK_PAYOUTS === '1' && process.env.ZAMU_STAGE !== 'production'
+  return (
+    process.env.MOCK_PAYOUTS === '1' &&
+    process.env.ZAMU_STAGE !== 'production' &&
+    // Never on AWS, whatever the environment says.
+    !process.env.AWS_LAMBDA_FUNCTION_NAME
+  )
 }
 
 type Fetch = typeof fetch

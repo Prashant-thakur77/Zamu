@@ -5,9 +5,18 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 rm -rf .next .lambda/web
-NEXT_PUBLIC_SITE_URL="${NEXT_PUBLIC_SITE_URL:-https://zamu.prashantthakur.dev}" npx next build
+# Empty values override .env.local, so local mock switches never reach AWS.
+NEXT_PUBLIC_SITE_URL="${NEXT_PUBLIC_SITE_URL:-https://zamu.prashantthakur.dev}" \
+  NEXT_PUBLIC_MOCK_NIMIQ= MOCK_PAYOUTS= npx next build
+# Refuse to ship a bundle whose wallet code was compiled with the mock on.
+# (The localhost/LAN pattern only survives compilation when the mock flag is on.)
+if grep -rqF '192\.168\.' .next/static/chunks; then
+  echo "Mock wallet is compiled in. Aborting." >&2
+  exit 1
+fi
 mkdir -p .lambda/web
 cp -r .next/standalone/. .lambda/web/
+rm -f .lambda/web/.env .lambda/web/.env.*
 mkdir -p .lambda/web/.next
 cp -r .next/static .lambda/web/.next/static
 [ -d public ] && cp -r public .lambda/web/public || true
