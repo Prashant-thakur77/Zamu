@@ -4,6 +4,8 @@ A chama where, when it's your turn, everyone's share lands straight in your M-Pe
 
 Live inside Nimiq Pay: open **Mini Apps → Custom URL** and enter `https://zamu.prashantthakur.dev`.
 
+Demo video: https://youtu.be/l7_HeIk76Ig
+
 <p>
   <img src="docs/screens/home.png" width="240" alt="First screen: Your chama, paid straight to M-Pesa, with the rotation ring" />
   <img src="docs/screens/board.png" width="240" alt="Round board: whose turn it is, each member's share and status" />

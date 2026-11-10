@@ -4,11 +4,11 @@
 
 Your chama, paid straight to M-Pesa.
 
-Zamu runs in Nimiq Pay: members tap Pay, NIM or USDT goes over Lightning, and the shillings land in whoever's turn it is. Everyone sees the M-Pesa receipt. No treasurer.
+Zamu runs in Nimiq Pay: members tap Pay, NIM or USDT goes over Lightning, and the shillings land in whoever's turn it is. No treasurer.
 
 My Nimiq Mini Apps Competition entry (Save).
 
-Nimiq Pay → Mini Apps → Custom URL → zamu.prashantthakur.dev
+https://youtu.be/l7_HeIk76Ig
 
 ## Skool
 
@@ -29,6 +29,7 @@ Other bits:
 - a demo chama for anyone outside Kenya, no money involved
 
 Open it in Nimiq Pay: Mini Apps → Custom URL → zamu.prashantthakur.dev
+Video: https://youtu.be/l7_HeIk76Ig
 Code (MIT): https://github.com/Prashant-thakur77/Zamu
 
 Feedback very welcome, especially from anyone who's in a chama.
