@@ -15,10 +15,12 @@ export default defineConfig({
   reporter: [['list']],
   use: {
     baseURL: process.env.E2E_BASE_URL ?? `http://localhost:${port}`,
-    ...devices['Pixel 5'],
-    viewport: { width: 360, height: 780 },
     trace: 'retain-on-failure',
   },
+  projects: [
+    { name: 'mobile', use: { ...devices['Pixel 5'], viewport: { width: 360, height: 780 } } },
+    { name: 'desktop', use: { viewport: { width: 1440, height: 900 } } },
+  ],
   webServer: process.env.E2E_BASE_URL
     ? undefined
     : {

@@ -5,6 +5,7 @@ test('pot planner: sliders update the pot and prefill the start form', async ({ 
   const page = await user(browser)
   await page.goto('/')
   const planner = page.getByTestId('planner')
+  await expect(page.getByTestId('plan-turn')).toContainText('As number')
   await planner.getByRole('slider', { name: 'Members' }).fill('10')
   await expect(page.getByTestId('plan-members')).toHaveText('10')
   await planner.getByRole('radio', { name: '2,000' }).click()

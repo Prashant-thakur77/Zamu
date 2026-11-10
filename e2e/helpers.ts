@@ -1,11 +1,14 @@
-import { expect, type Browser, type Page } from '@playwright/test'
+import { expect, test, type Browser, type Page } from '@playwright/test'
 
 export function phone(suffix = '678'): string {
   return `07${String(Math.floor(Math.random() * 1e5)).padStart(5, '0')}${suffix}`
 }
 
 export async function user(browser: Browser, opts: { lang?: 'en' | 'sw'; init?: string } = {}): Promise<Page> {
-  const ctx = await browser.newContext({ viewport: { width: 360, height: 780 }, isMobile: true, hasTouch: true, locale: 'en-KE' })
+  const desktop = test.info().project.name === 'desktop'
+  const ctx = await browser.newContext(
+    desktop ? { viewport: { width: 1440, height: 900 }, locale: 'en-KE' } : { viewport: { width: 360, height: 780 }, isMobile: true, hasTouch: true, locale: 'en-KE' },
+  )
   if (opts.init) await ctx.addInitScript(opts.init)
   await ctx.addInitScript(`try { localStorage.setItem('zamu.lang', '${opts.lang ?? 'en'}') } catch {}`)
   const page = await ctx.newPage()

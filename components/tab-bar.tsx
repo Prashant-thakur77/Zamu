@@ -32,7 +32,7 @@ export function TabBar() {
   const { t } = useApp()
   const path = usePathname()
   return (
-    <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-40 flex justify-center pb-[env(safe-area-inset-bottom)]">
+    <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-40 flex justify-center pb-[env(safe-area-inset-bottom)] lg:static lg:pb-0">
       <div className="grid w-full max-w-[480px] grid-cols-4 border-t-2 border-ink bg-card">
         {TABS.map((tab) => {
           const on = tab.href === '/' ? path === '/' : path.startsWith(tab.href) || (tab.href === '/chamas' && path.startsWith('/c/'))
@@ -51,5 +51,5 @@ export function TabBar() {
 
 /** Space so page content never hides under the tab bar. */
 export function TabSpacer() {
-  return <div aria-hidden className="h-[76px] shrink-0" />
+  return <div aria-hidden className="h-[76px] shrink-0 lg:hidden" />
 }

@@ -221,3 +221,10 @@ textarea {
   }
   .spinner { animation: spin 1600ms linear infinite !important; animation-iteration-count: infinite !important; animation-duration: 1600ms !important; }
 }
+
+/* Anything scrolled into view (focus, links, find-in-page) stops above the tab bar. */
+html,
+#app-scroll {
+  scroll-padding-bottom: 90px;
+  scroll-padding-top: 12px;
+}

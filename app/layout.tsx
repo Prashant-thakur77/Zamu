@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import { Archivo, Instrument_Sans, JetBrains_Mono } from 'next/font/google'
 import { AppProvider } from '@/components/app-provider'
 import { TabBar, TabSpacer } from '@/components/tab-bar'
+import { DesktopAside } from '@/components/desktop-aside'
+import { FrameScroll } from '@/components/frame-scroll'
 import { BOOT_SCRIPT, DEV_ERROR_SCRIPT } from './boot-script'
 import './globals.css'
 
@@ -48,10 +50,21 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       </head>
       <body className="relative min-h-full">
         <AppProvider>
-          <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-[480px] flex-col">
-            {children}
-            <TabSpacer />
-            <TabBar />
+          <div className="lg:flex lg:h-dvh lg:items-center lg:justify-center lg:gap-20 lg:px-10">
+            <DesktopAside />
+            {/* On desktop the app lives in a phone-sized frame that scrolls on its own; the transform makes it the
+                containing block for the tab bar and sheets, so they stay inside the frame. */}
+            <div
+              id="app-frame"
+              className="relative z-10 mx-auto flex min-h-dvh w-full max-w-[480px] flex-col lg:mx-0 lg:h-[min(920px,calc(100dvh-48px))] lg:min-h-0 lg:w-[430px] lg:shrink-0 lg:overflow-hidden lg:rounded-[40px] lg:border-[3px] lg:border-ink lg:bg-paper lg:shadow-[14px_14px_0_0_var(--ink-3)] lg:[transform:translateZ(0)]"
+            >
+              <div id="app-scroll" className="flex flex-1 flex-col lg:min-h-0 lg:overflow-y-auto lg:overscroll-contain">
+                <FrameScroll />
+                {children}
+                <TabSpacer />
+              </div>
+              <TabBar />
+            </div>
           </div>
         </AppProvider>
       </body>

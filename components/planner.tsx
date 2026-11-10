@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useApp } from './app-provider'
 import { Kes } from './ui'
 import { formatDay } from '@/lib/i18n'
@@ -22,12 +22,16 @@ export function Planner() {
   const cycleDays = DAYS[freq] * members
   const span =
     freq === 'daily' ? t('plan.days', { n: members }) : freq === 'monthly' ? t('plan.months', { n: members }) : t('plan.weeks', { n: (cycleDays / 7) | 0 })
+  // Dates use the viewer's clock, so they are computed after the page loads (never on the server).
+  const [now, setNow] = useState<Date | null>(null)
+  useEffect(() => setNow(new Date()), [])
   const turnDate = useMemo(() => {
-    const d = new Date()
+    if (!now) return null
+    const d = new Date(now)
     if (freq === 'monthly') d.setMonth(d.getMonth() + (p - 1))
     else d.setDate(d.getDate() + DAYS[freq] * (p - 1))
     return d
-  }, [freq, p])
+  }, [freq, p, now])
 
   return (
     <section className="px-4 pt-8" aria-labelledby="plan-h">
@@ -76,7 +80,7 @@ export function Planner() {
             className="mt-1 w-full accent-[var(--sun)]" aria-label={t('plan.position')} />
         </label>
         <p className="mt-2 text-[14px] leading-snug text-ink" data-testid="plan-turn">
-          {t('plan.yourTurn', { n: p, date: formatDay(turnDate, lang) })}{' '}
+          {turnDate ? t('plan.yourTurn', { n: p, date: formatDay(turnDate, lang) }) : ''}{' '}
           <span className="text-ink-2">
             {t('plan.even', { total: `KSh ${(share * (members - 1)).toLocaleString('en-US')}`, pot: `KSh ${pot.toLocaleString('en-US')}` })}
           </span>

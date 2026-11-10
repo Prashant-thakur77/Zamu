@@ -124,6 +124,19 @@ function build(openIndex: number, paid: Record<string, InvoiceView['status']>): 
 }
 
 export default function DemoPage() {
+  // The demo is built from the viewer's clock, so it renders only in the browser.
+  const [ready, setReady] = useState(false)
+  useEffect(() => setReady(true), [])
+  if (!ready)
+    return (
+      <main className="flex flex-1 flex-col">
+        <TopBar back="/" />
+      </main>
+    )
+  return <DemoInner />
+}
+
+function DemoInner() {
   const { t } = useApp()
   const [openIndex, setOpenIndex] = useState(3)
   const [paid, setPaid] = useState<Record<string, InvoiceView['status']>>({ 'demo:Wanjiru': 'delivered', 'demo:Kamau': 'delivered' })

@@ -185,6 +185,8 @@ export const dict = {
     'common.retry': 'Try again',
     'common.home': 'Home',
 
+    'desk.scan': 'Open it in Nimiq Pay',
+    'desk.scanSub': 'Zamu is a Nimiq Pay Mini App. Scan with your phone camera to open it inside the wallet.',
     'nav.home': 'Home',
     'nav.chamas': 'Chamas',
     'nav.me': 'Me',
@@ -463,6 +465,8 @@ export const dict = {
     'common.retry': 'Jaribu tena',
     'common.home': 'Nyumbani',
 
+    'desk.scan': 'Ifungue ndani ya Nimiq Pay',
+    'desk.scanSub': 'Zamu ni Mini App ya Nimiq Pay. Skani kwa kamera ya simu kuifungua ndani ya pochi.',
     'nav.home': 'Nyumbani',
     'nav.chamas': 'Vyama',
     'nav.me': 'Mimi',
