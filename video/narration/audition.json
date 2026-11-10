@@ -1,0 +1,4 @@
+[
+  {"scene": "A", "id": "hook", "caption": "Every Friday, Wanjiru's chama puts in a thousand shillings each. This week, it's her turn.", "spoken": "Every Friday, Wanjiru's chama puts in a thousand shillings each. This week, it's her turn.", "exaggeration": 0.6, "cfg": 0.35},
+  {"scene": "A", "id": "proof", "caption": "A share only turns green when the M-Pesa receipt comes back, and the whole group can open it.", "spoken": "A share only turns green when the M-Pesa receipt comes back, and the whole group can open it.", "exaggeration": 0.65, "cfg": 0.4}
+]

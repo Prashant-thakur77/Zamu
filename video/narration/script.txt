@@ -1,0 +1,17 @@
+Every Friday, Wanjiru's chama puts in a thousand shillings each. This week, it's her turn.
+But one treasurer collects it all, in cash or on one phone, and the whole group has to trust them.
+8.7 million Kenyans save in groups like this.
+This is Zamu. Your chama, paid straight to M-Pesa.
+Inside Nimiq Pay, Wanjiru starts the chama: the share, how often, how many.
+Friends join with a code, and the M-Pesa number their turn is paid to.
+Then everyone signs the agreement with their own Nimiq key.
+Each round, members tap Pay. Nimiq Pay swaps their NIM or USDT to Lightning, and a payout partner turns it into exact shillings in Wanjiru's M-Pesa.
+A share only turns green when the M-Pesa receipt comes back, and the whole group can open it.
+If Nimiq Pay can't tell whether a payment went out, Zamu never lets you pay twice. It checks, and waits.
+And anyone who stops paying loses their turn until they catch up.
+Under the hood, Nimiq Pay signs and pays. Zamu checks every invoice: Bitcoin mainnet, the exact amount, the right phone, still valid. A job on AWS keeps checking until the receipt arrives.
+On a live quote today, the payout leg cost one percent over the partner's own rate.
+Real payouts are next, and every number will come from our proof script.
+Shares land in M-Pesa, not a group wallet. Paid means a receipt. Everyone signs with Nimiq. No treasurer holds the pot.
+Friday again. Wanjiru's phone buzzes: five thousand shillings, and a receipt for every share.
+Zamu. Open it in Nimiq Pay.

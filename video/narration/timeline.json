@@ -1,0 +1,252 @@
+{
+ "duration": 134.833,
+ "scenes": [
+  {
+   "id": "C0",
+   "start": 0.0,
+   "duration": 2.6,
+   "voice": false
+  },
+  {
+   "id": "S1",
+   "start": 2.6,
+   "duration": 7.433,
+   "voice": true
+  },
+  {
+   "id": "S2",
+   "start": 10.033,
+   "duration": 7.933,
+   "voice": true
+  },
+  {
+   "id": "S3",
+   "start": 17.967,
+   "duration": 5.5,
+   "voice": true
+  },
+  {
+   "id": "T1",
+   "start": 23.467,
+   "duration": 5.067,
+   "voice": true
+  },
+  {
+   "id": "S5",
+   "start": 28.533,
+   "duration": 7.133,
+   "voice": true
+  },
+  {
+   "id": "S6",
+   "start": 35.667,
+   "duration": 5.5,
+   "voice": true
+  },
+  {
+   "id": "S7",
+   "start": 41.167,
+   "duration": 4.667,
+   "voice": true
+  },
+  {
+   "id": "T2",
+   "start": 45.833,
+   "duration": 2.2,
+   "voice": false
+  },
+  {
+   "id": "S8",
+   "start": 48.033,
+   "duration": 12.633,
+   "voice": true
+  },
+  {
+   "id": "S9",
+   "start": 60.667,
+   "duration": 6.733,
+   "voice": true
+  },
+  {
+   "id": "S10",
+   "start": 67.4,
+   "duration": 8.3,
+   "voice": true
+  },
+  {
+   "id": "S11",
+   "start": 75.7,
+   "duration": 5.433,
+   "voice": true
+  },
+  {
+   "id": "T3",
+   "start": 81.133,
+   "duration": 2.0,
+   "voice": false
+  },
+  {
+   "id": "S12",
+   "start": 83.133,
+   "duration": 15.767,
+   "voice": true
+  },
+  {
+   "id": "S13",
+   "start": 98.9,
+   "duration": 6.567,
+   "voice": true
+  },
+  {
+   "id": "S14",
+   "start": 105.467,
+   "duration": 5.133,
+   "voice": true
+  },
+  {
+   "id": "T4",
+   "start": 110.6,
+   "duration": 1.8,
+   "voice": false
+  },
+  {
+   "id": "S15",
+   "start": 112.4,
+   "duration": 10.267,
+   "voice": true
+  },
+  {
+   "id": "S16",
+   "start": 122.667,
+   "duration": 7.667,
+   "voice": true
+  },
+  {
+   "id": "S17",
+   "start": 130.333,
+   "duration": 4.5,
+   "voice": true
+  }
+ ],
+ "lines": [
+  {
+   "id": "s1",
+   "scene": "S1",
+   "start": 2.9,
+   "end": 9.54,
+   "caption": "Every Friday, Wanjiru's chama puts in a thousand shillings each. This week, it's her turn."
+  },
+  {
+   "id": "s2",
+   "scene": "S2",
+   "start": 10.333,
+   "end": 17.333,
+   "caption": "But one treasurer collects it all, in cash or on one phone, and the whole group has to trust them."
+  },
+  {
+   "id": "s3",
+   "scene": "S3",
+   "start": 18.267,
+   "end": 22.347,
+   "caption": "8.7 million Kenyans save in groups like this."
+  },
+  {
+   "id": "s4",
+   "scene": "T1",
+   "start": 23.767,
+   "end": 27.847,
+   "caption": "This is Zamu. Your chama, paid straight to M-Pesa."
+  },
+  {
+   "id": "s5",
+   "scene": "S5",
+   "start": 28.833,
+   "end": 35.073,
+   "caption": "Inside Nimiq Pay, Wanjiru starts the chama: the share, how often, how many."
+  },
+  {
+   "id": "s6",
+   "scene": "S6",
+   "start": 35.967,
+   "end": 40.647,
+   "caption": "Friends join with a code, and the M-Pesa number their turn is paid to."
+  },
+  {
+   "id": "s7",
+   "scene": "S7",
+   "start": 41.467,
+   "end": 45.187,
+   "caption": "Then everyone signs the agreement with their own Nimiq key."
+  },
+  {
+   "id": "s8",
+   "scene": "S8",
+   "start": 48.333,
+   "end": 60.093,
+   "caption": "Each round, members tap Pay. Nimiq Pay swaps their NIM or USDT to Lightning, and a payout partner turns it into exact shillings in Wanjiru's M-Pesa."
+  },
+  {
+   "id": "s9",
+   "scene": "S9",
+   "start": 60.967,
+   "end": 66.727,
+   "caption": "A share only turns green when the M-Pesa receipt comes back, and the whole group can open it."
+  },
+  {
+   "id": "s10",
+   "scene": "S10",
+   "start": 67.7,
+   "end": 75.1,
+   "caption": "If Nimiq Pay can't tell whether a payment went out, Zamu never lets you pay twice. It checks, and waits."
+  },
+  {
+   "id": "s11",
+   "scene": "S11",
+   "start": 76.0,
+   "end": 80.6,
+   "caption": "And anyone who stops paying loses their turn until they catch up."
+  },
+  {
+   "id": "s12",
+   "scene": "S12",
+   "start": 83.433,
+   "end": 98.233,
+   "caption": "Under the hood, Nimiq Pay signs and pays. Zamu checks every invoice: Bitcoin mainnet, the exact amount, the right phone, still valid. A job on AWS keeps checking until the receipt arrives."
+  },
+  {
+   "id": "s13",
+   "scene": "S13",
+   "start": 99.2,
+   "end": 104.88,
+   "caption": "On a live quote today, the payout leg cost one percent over the partner's own rate."
+  },
+  {
+   "id": "s14",
+   "scene": "S14",
+   "start": 105.767,
+   "end": 110.087,
+   "caption": "Real payouts are next, and every number will come from our proof script."
+  },
+  {
+   "id": "s15",
+   "scene": "S15",
+   "start": 112.7,
+   "end": 122.02,
+   "caption": "Shares land in M-Pesa, not a group wallet. Paid means a receipt. Everyone signs with Nimiq. No treasurer holds the pot."
+  },
+  {
+   "id": "s16",
+   "scene": "S16",
+   "start": 122.967,
+   "end": 129.767,
+   "caption": "Friday again. Wanjiru's phone buzzes: five thousand shillings, and a receipt for every share."
+  },
+  {
+   "id": "s17",
+   "scene": "S17",
+   "start": 130.633,
+   "end": 133.713,
+   "caption": "Zamu. Open it in Nimiq Pay."
+  }
+ ]
+}

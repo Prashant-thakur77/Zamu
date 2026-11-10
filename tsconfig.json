@@ -40,6 +40,7 @@
     ".open-next",
     ".sst",
     "node_modules",
-    "sst.config.ts"
+    "sst.config.ts",
+    "video/film"
   ]
 }

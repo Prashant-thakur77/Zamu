@@ -1,0 +1,15 @@
+# rebuilt from code; large media stays local
+film/node_modules/
+film/out/
+out/*.mp4
+*.mp4
+!film/public/captures/*.mp4
+!film/public/footage/*.mp4
+*.wav
+narration/audition/
+narration/takes/
+footage/*.src.mp4
+qa/
+.footage_search.json
+narration/*.log
+refs/

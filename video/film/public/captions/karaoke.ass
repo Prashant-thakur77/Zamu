@@ -1,0 +1,77 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1920
+PlayResY: 1080
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Cap,Inter,64,&H00D4EA5E,&H00FFFFFF,&H66000000,&H80000000,-1,0,0,0,100,100,0,0,1,3,2,2,120,120,110,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:02.70,0:00:04.09,Cap,,0,0,0,,{\k68}Every {\k56}Friday,
+Dialogue: 0,0:00:04.44,0:00:06.57,Cap,,0,0,0,,{\k64}Wanjiru's {\k28}chama {\k34}puts {\k26}in {\k8}a {\k38}thousand
+Dialogue: 0,0:00:06.42,0:00:07.35,Cap,,0,0,0,,{\k48}shillings {\k30}each.
+Dialogue: 0,0:00:07.86,0:00:08.45,Cap,,0,0,0,,{\k14}This {\k30}week,
+Dialogue: 0,0:00:08.44,0:00:09.35,Cap,,0,0,0,,{\k24}it's {\k12}her {\k40}turn.
+Dialogue: 0,0:00:10.62,0:00:12.49,Cap,,0,0,0,,{\k6}But {\k34}one {\k36}treasurer {\k46}collects {\k22}it {\k28}all,
+Dialogue: 0,0:00:12.76,0:00:14.59,Cap,,0,0,0,,{\k18}in {\k36}cash {\k40}or {\k16}on {\k22}one {\k36}phone,
+Dialogue: 0,0:00:14.78,0:00:16.35,Cap,,0,0,0,,{\k28}and {\k12}the {\k26}whole {\k30}group {\k26}has {\k20}to
+Dialogue: 0,0:00:16.20,0:00:16.99,Cap,,0,0,0,,{\k22}trust {\k42}them.
+Dialogue: 0,0:00:18.48,0:00:21.31,Cap,,0,0,0,,{\k94}8.7 {\k40}million {\k54}Kenyans {\k38}save {\k20}in {\k22}groups
+Dialogue: 0,0:00:21.16,0:00:22.05,Cap,,0,0,0,,{\k32}like {\k42}this.
+Dialogue: 0,0:00:23.94,0:00:24.95,Cap,,0,0,0,,{\k24}This {\k20}is {\k42}Zamu.
+Dialogue: 0,0:00:25.26,0:00:26.11,Cap,,0,0,0,,{\k28}Your {\k42}chama,
+Dialogue: 0,0:00:25.96,0:00:27.61,Cap,,0,0,0,,{\k40}paid {\k36}straight {\k18}to {\k56}M-Pesa.
+Dialogue: 0,0:00:28.96,0:00:30.69,Cap,,0,0,0,,{\k60}Inside {\k49}Nimiq {\k49}Pay,
+Dialogue: 0,0:00:30.86,0:00:32.31,Cap,,0,0,0,,{\k34}Wanjiru {\k38}starts {\k26}the {\k32}chama:
+Dialogue: 0,0:00:32.54,0:00:33.07,Cap,,0,0,0,,{\k8}the {\k30}share,
+Dialogue: 0,0:00:33.44,0:00:34.09,Cap,,0,0,0,,{\k10}how {\k40}often,
+Dialogue: 0,0:00:34.16,0:00:34.89,Cap,,0,0,0,,{\k20}how {\k38}many.
+Dialogue: 0,0:00:36.20,0:00:37.67,Cap,,0,0,0,,{\k30}Friends {\k32}join {\k24}with {\k12}a {\k34}code,
+Dialogue: 0,0:00:38.02,0:00:39.79,Cap,,0,0,0,,{\k6}and {\k14}the {\k54}M-Pesa {\k32}number {\k26}their {\k30}turn
+Dialogue: 0,0:00:39.64,0:00:40.53,Cap,,0,0,0,,{\k20}is {\k20}paid {\k34}to.
+Dialogue: 0,0:00:41.68,0:00:43.77,Cap,,0,0,0,,{\k28}Then {\k28}everyone {\k38}signs {\k26}the {\k30}agreement {\k32}with
+Dialogue: 0,0:00:43.62,0:00:44.93,Cap,,0,0,0,,{\k18}their {\k30}own {\k34}Nimiq {\k34}key.
+Dialogue: 0,0:00:48.34,0:00:49.31,Cap,,0,0,0,,{\k42}Each {\k40}round,
+Dialogue: 0,0:00:49.50,0:00:50.88,Cap,,0,0,0,,{\k24}members {\k34}tap {\k65}Pay.
+Dialogue: 0,0:00:50.73,0:00:53.55,Cap,,0,0,0,,{\k65}Nimiq {\k65}Pay {\k30}swaps {\k38}their {\k22}NIM {\k20}or
+Dialogue: 0,0:00:53.40,0:00:55.11,Cap,,0,0,0,,{\k96}USDT {\k20}to {\k30}Lightning,
+Dialogue: 0,0:00:55.42,0:00:57.05,Cap,,0,0,0,,{\k26}and {\k10}a {\k26}payout {\k42}partner {\k28}turns {\k16}it
+Dialogue: 0,0:00:56.90,0:00:59.63,Cap,,0,0,0,,{\k26}into {\k1}exact {\k50}shillings {\k16}in {\k74}Wanjiru's {\k50}M-Pesa.
+Dialogue: 0,0:01:01.20,0:01:02.95,Cap,,0,0,0,,{\k14}A {\k20}share {\k32}only {\k36}turns {\k32}green {\k26}when
+Dialogue: 0,0:01:02.80,0:01:04.63,Cap,,0,0,0,,{\k12}the {\k54}M-Pesa {\k28}receipt {\k34}comes {\k40}back,
+Dialogue: 0,0:01:04.76,0:01:06.69,Cap,,0,0,0,,{\k22}and {\k12}the {\k22}whole {\k26}group {\k24}can {\k24}open {\k48}it.
+Dialogue: 0,0:01:07.94,0:01:09.75,Cap,,0,0,0,,{\k12}If {\k36}Nimiq {\k36}Pay {\k38}can't {\k20}tell {\k24}whether
+Dialogue: 0,0:01:09.60,0:01:10.91,Cap,,0,0,0,,{\k24}a {\k24}payment {\k28}went {\k40}out,
+Dialogue: 0,0:01:11.30,0:01:12.97,Cap,,0,0,0,,{\k22}Zamu {\k30}never {\k24}lets {\k22}you {\k20}pay {\k34}twice.
+Dialogue: 0,0:01:13.34,0:01:13.99,Cap,,0,0,0,,{\k16}It {\k34}checks,
+Dialogue: 0,0:01:13.84,0:01:14.81,Cap,,0,0,0,,{\k52}and {\k30}waits.
+Dialogue: 0,0:01:16.18,0:01:18.69,Cap,,0,0,0,,{\k18}And {\k34}anyone {\k32}who {\k30}stops {\k52}paying {\k70}loses
+Dialogue: 0,0:01:18.54,0:01:20.45,Cap,,0,0,0,,{\k34}their {\k30}turn {\k28}until {\k20}they {\k22}catch {\k42}up.
+Dialogue: 0,0:01:23.28,0:01:24.55,Cap,,0,0,0,,{\k64}Under {\k20}the {\k28}hood,
+Dialogue: 0,0:01:24.86,0:01:26.51,Cap,,0,0,0,,{\k29}Nimiq {\k29}Pay {\k34}signs {\k24}and {\k34}pays.
+Dialogue: 0,0:01:27.34,0:01:28.99,Cap,,0,0,0,,{\k22}Zamu {\k26}checks {\k46}every {\k56}invoice:
+Dialogue: 0,0:01:29.62,0:01:30.39,Cap,,0,0,0,,{\k4}Bitcoin {\k58}mainnet,
+Dialogue: 0,0:01:30.64,0:01:31.59,Cap,,0,0,0,,{\k8}the {\k36}exact {\k36}amount,
+Dialogue: 0,0:01:31.88,0:01:32.69,Cap,,0,0,0,,{\k8}the {\k18}right {\k40}phone,
+Dialogue: 0,0:01:32.82,0:01:33.71,Cap,,0,0,0,,{\k28}still {\k46}valid.
+Dialogue: 0,0:01:34.16,0:01:36.41,Cap,,0,0,0,,{\k16}A {\k24}job {\k22}on {\k58}AWS {\k40}keeps {\k50}checking
+Dialogue: 0,0:01:36.26,0:01:37.71,Cap,,0,0,0,,{\k38}until {\k14}the {\k28}receipt {\k50}arrives.
+Dialogue: 0,0:01:39.44,0:01:40.79,Cap,,0,0,0,,{\k14}On {\k14}a {\k22}live {\k32}quote {\k38}today,
+Dialogue: 0,0:01:41.16,0:01:43.07,Cap,,0,0,0,,{\k6}the {\k32}payout {\k34}leg {\k26}cost {\k39}one {\k39}percent
+Dialogue: 0,0:01:42.92,0:01:44.63,Cap,,0,0,0,,{\k32}over {\k20}the {\k50}partner's {\k18}own {\k36}rate.
+Dialogue: 0,0:01:45.86,0:01:47.27,Cap,,0,0,0,,{\k32}Real {\k38}payouts {\k20}are {\k36}next,
+Dialogue: 0,0:01:47.48,0:01:49.11,Cap,,0,0,0,,{\k20}and {\k32}every {\k20}number {\k28}will {\k24}come {\k24}from
+Dialogue: 0,0:01:48.96,0:01:49.83,Cap,,0,0,0,,{\k16}our {\k20}proof {\k36}script.
+Dialogue: 0,0:01:52.58,0:01:54.61,Cap,,0,0,0,,{\k68}Shares {\k40}land {\k22}in {\k58}M-Pesa,
+Dialogue: 0,0:01:54.94,0:01:56.21,Cap,,0,0,0,,{\k18}not {\k20}a {\k26}group {\k48}wallet.
+Dialogue: 0,0:01:56.86,0:01:57.91,Cap,,0,0,0,,{\k8}Paid {\k32}means {\k16}a {\k34}receipt.
+Dialogue: 0,0:01:58.28,0:01:59.67,Cap,,0,0,0,,{\k32}Everyone {\k34}signs {\k28}with {\k30}Nimiq.
+Dialogue: 0,0:01:59.88,0:02:01.57,Cap,,0,0,0,,{\k30}No {\k38}treasurer {\k40}holds {\k20}the {\k26}pot.
+Dialogue: 0,0:02:03.48,0:02:04.05,Cap,,0,0,0,,{\k1}Friday {\k42}again.
+Dialogue: 0,0:02:04.78,0:02:06.37,Cap,,0,0,0,,{\k50}Wanjiru's {\k26}phone {\k68}buzzes:
+Dialogue: 0,0:02:06.52,0:02:07.69,Cap,,0,0,0,,{\k26}five {\k26}thousand {\k50}shillings,
+Dialogue: 0,0:02:07.90,0:02:09.53,Cap,,0,0,0,,{\k14}and {\k12}a {\k30}receipt {\k28}for {\k34}every {\k30}share.
+Dialogue: 0,0:02:11.04,0:02:11.53,Cap,,0,0,0,,{\k34}Zamu.
+Dialogue: 0,0:02:11.96,0:02:13.75,Cap,,0,0,0,,{\k26}Open {\k18}it {\k20}in {\k50}Nimiq {\k50}Pay.

@@ -1,0 +1,33 @@
+{
+  "generatedAt": "2026-11-10T16:19:28.938Z",
+  "quote": {
+    "kes": 1000,
+    "sats": 10603,
+    "msatsPerKes": 10498,
+    "spreadPct": 1,
+    "expirySeconds": 119,
+    "note": "Live invoice from the payout partner for KSh 1,000, validated by lib/lightning.ts, not paid."
+  },
+  "baseline": {
+    "label": "Average cost to send $200 to sub-Saharan Africa",
+    "pct": 8.46,
+    "source": "World Bank, Remittance Prices Worldwide, Q3 2025"
+  },
+  "scale": {
+    "value": 8.7,
+    "unit": "million",
+    "label": "Kenyan adults in chamas and other savings groups",
+    "source": "FinAccess Household Survey 2024 (CBK, KNBS, FSD Kenya)"
+  },
+  "tests": {
+    "unit": 24,
+    "integration": 9,
+    "e2e": 12,
+    "liveChecks": 30,
+    "source": "TESTING.md"
+  },
+  "live": {
+    "url": "https://zamu.prashantthakur.dev",
+    "healthy": true
+  }
+}
