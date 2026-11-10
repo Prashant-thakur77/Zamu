@@ -9,8 +9,8 @@ What was tested, how, and the result. Real-money payouts are the one thing not d
 | Type check | `npm run typecheck` | whole app, after Next route type generation | pass |
 | Production build | `npm run build` | Next.js 16.4.6 build | pass |
 | Unit | `npm run test:unit` | phone normalisation; invoice validation (wrong network, amount mismatch, wrong recipient, about to expire, description hash); a real Tando invoice decoded and validated; Tando status mapping; round completes only when all delivered; skip-until-paid-up planning; on-time record; reserve meter; agreement text; invite/nudge messages; Nimiq address derivation and message signatures checked against `@nimiq/core`; every English string has a Swahili one | 24/24 pass |
-| Integration | `npm run test:integration` | real Postgres + mock payout partner: create/join/lock/sign with real Nimiq keys, refused forged agreement signature, round opens on last signature, phones never leak in the invite preview and are masked for other members, one invoice per member-round, duplicate tap returns the same invoice, never re-issued after submit or an uncertain result, expired unpaid invoice replaced, delivered with receipt, round closes, failed payout, wrong-network invoice refused, skip-until-paid-up swaps the turn, Lightning address payout (verify URL and one-tap recipient confirm), NIM payout found by memo and gated on confirmations | 9/9 pass |
-| End-to-end | `npm run test:e2e` | Playwright, 360×780, mock Nimiq wallet (real signatures) and mock payout partner | 12/12 pass |
+| Integration | `npm run test:integration` | real Postgres + mock payout partner: create/join/lock/sign with real Nimiq keys, refused forged agreement signature, round opens on last signature, phones never leak in the invite preview and are masked for other members, one invoice per member-round, duplicate tap returns the same invoice, never re-issued after submit or an uncertain result, expired unpaid invoice replaced, delivered with receipt, round closes, failed payout, wrong-network invoice refused, skip-until-paid-up swaps the turn, Lightning address payout (verify URL and one-tap recipient confirm), NIM payout found by memo and gated on confirmations | 10/10 pass (adds: my record totals, what I owe, received turns; leaving rules) |
+| End-to-end | `npm run test:e2e` | Playwright, 360×780, mock Nimiq wallet (real signatures) and mock payout partner | 15/15 pass |
 
 ### End-to-end flows
 
@@ -20,6 +20,9 @@ What was tested, how, and the result. Real-money payouts are the one thing not d
 - Slow payout: stays "Paying" and never turns Paid.
 - Testnet host: banner telling the member to switch to mainnet.
 - Bad phone number refused, consent box required.
+- Pot planner sliders update the pot, cycle and your turn date, and prefill the start form; tab bar reaches Home, Chamas, Me and Help; FAQ opens and closes.
+- Invite QR code and link; changing where you are paid and leaving while the chama is forming.
+- After a delivered share: Receipts tab lists the M-Pesa receipt, Activity tab shows the timeline, Me shows paid/received and 100% on time, the recipient sees their turn collecting.
 - First screen copy and buttons, Swahili toggle and Swahili from the host language, demo chama payment with receipt, staked reserve meter + default validator + stake, and no sideways scroll on any screen at 360 px.
 
 ## Live partner endpoints (read-only)
@@ -48,7 +51,7 @@ What was tested, how, and the result. Real-money payouts are the one thing not d
 | Database migrations applied (from inside AWS, `zamu-<stage>-migrate`) | pass |
 | Validator list and default (`Garuda Pool`) | pass |
 
-Total: 30/30 on dev, and 30/30 on production at https://zamu.prashantthakur.dev (TLS certificate issued by Amazon, valid to May 2027).
+Total: 35/35 on dev and 35/35 on production (now also `/chamas`, `/me`, `/help`, `GET /api/me`, and leaving refused once the order is fixed) at https://zamu.prashantthakur.dev (TLS certificate issued by Amazon, valid to May 2027).
 
 Also on production: the Playwright screen tests (first screen, Swahili, demo chama payment, no sideways scroll at 360 px) pass, 4/4; outside Nimiq Pay the app shows "Open Zamu inside Nimiq Pay" and offers no mock sign-in; no console errors.
 
@@ -57,6 +60,8 @@ Also on production: the Playwright screen tests (first screen, Swahili, demo cha
 - A non-numeric `currencyAmountSent` from the partner became `NaN` and broke the delivered update. Now parsed defensively.
 - When the last member paid, the round closed and the pay sheet vanished before they saw their receipt. The sheet now stays bound to the round it opened for.
 - The AWS bundle was built with the local mock-wallet switch from `.env.local` compiled in, which removed the real Nimiq Pay path. The build now clears the mock switches, refuses to ship a bundle that contains the mock path, and the mock can only turn on for localhost/LAN addresses and never on Lambda.
+- The new tab bar sat above bottom sheets and covered their buttons (caught by e2e); it now shares the sheets' stacking context.
+- "Agreement signed by n/total" moved out of sight when tabs were added; it is back in the chama header.
 - Database migrations could not run from a developer machine whose network blocks port 5432; they now run from a Lambda inside AWS.
 
 ## Not run here
