@@ -10,7 +10,7 @@ What was tested, how, and the result. Real-money payouts are the one thing not d
 | Production build | `npm run build` | Next.js 16.4.6 build | pass |
 | Unit | `npm run test:unit` | phone normalisation; invoice validation (wrong network, amount mismatch, wrong recipient, about to expire, description hash); a real Tando invoice decoded and validated; Tando status mapping; round completes only when all delivered; skip-until-paid-up planning; on-time record; reserve meter; agreement text; invite/nudge messages; Nimiq address derivation and message signatures checked against `@nimiq/core`; every English string has a Swahili one | 24/24 pass |
 | Integration | `npm run test:integration` | real Postgres + mock payout partner: create/join/lock/sign with real Nimiq keys, refused forged agreement signature, round opens on last signature, phones never leak in the invite preview and are masked for other members, one invoice per member-round, duplicate tap returns the same invoice, never re-issued after submit or an uncertain result, expired unpaid invoice replaced, delivered with receipt, round closes, failed payout, wrong-network invoice refused, skip-until-paid-up swaps the turn, Lightning address payout (verify URL and one-tap recipient confirm), NIM payout found by memo and gated on confirmations | 10/10 pass (adds: my record totals, what I owe, received turns; leaving rules) |
-| End-to-end | `npm run test:e2e` | Playwright, 360×780, mock Nimiq wallet (real signatures) and mock payout partner | 15/15 pass |
+| End-to-end | `npm run test:e2e` | Playwright on two projects, phone (360×780) and desktop (1440×900), mock Nimiq wallet (real signatures) and mock payout partner | 15/15 pass on phone, 15/15 on desktop |
 
 ### End-to-end flows
 
@@ -60,6 +60,8 @@ Also on production: the Playwright screen tests (first screen, Swahili, demo cha
 - A non-numeric `currencyAmountSent` from the partner became `NaN` and broke the delivered update. Now parsed defensively.
 - When the last member paid, the round closed and the pay sheet vanished before they saw their receipt. The sheet now stays bound to the round it opened for.
 - The AWS bundle was built with the local mock-wallet switch from `.env.local` compiled in, which removed the real Nimiq Pay path. The build now clears the mock switches, refuses to ship a bundle that contains the mock path, and the mock can only turn on for localhost/LAN addresses and never on Lambda.
+- On desktop the app now sits in a phone frame beside a pitch panel (what Zamu is, a QR code to open it in Nimiq Pay, the demo). Desktop e2e first failed because buttons scrolled under the floating tab bar; the frame now scrolls in its own area with the tab bar as a solid footer.
+- A React hydration error (#418) on the live site: the pot planner and the demo chama rendered dates with the server's clock. They now render after the page loads; the live site shows no console errors at 390, 1440 and 1920 px.
 - The new tab bar sat above bottom sheets and covered their buttons (caught by e2e); it now shares the sheets' stacking context.
 - "Agreement signed by n/total" moved out of sight when tabs were added; it is back in the chama header.
 - Database migrations could not run from a developer machine whose network blocks port 5432; they now run from a Lambda inside AWS.
